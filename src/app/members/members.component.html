@@ -1,0 +1,58 @@
+<div class='card'>
+    <div class='card-header'>
+      {{pageTitle}}
+    </div>
+    <div class='card-body'>
+      <div class='row'>
+        <div class='col-md-2'>Filter by:</div>
+        <div class='col-md-4'>
+          <input type='text'/>
+                  <!-- [(ngModel)]='listFilter' /> -->
+        </div>
+      </div>
+      <div class='row'
+           *ngIf='listFilter'>
+        <div class='col-md-6'>
+          <h4>Filtered by: {{listFilter}}</h4>
+        </div>
+      </div>
+      <div class='table-responsive'>
+        <table class='table'
+               *ngIf='members && members.length'>
+          <thead>
+            <tr>              
+              <th>Name</th>
+              <th>Father's Name</th>
+              <th>DOB</th>
+              <th>Gender</th>
+              <th>Occupation</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let member of members'>              
+              <td>{{ member.Name }}</td>
+              <td>{{ member.FatherName }}</td>
+              <td>{{ member.DOB }}</td>
+              <td>{{ member.Gender}}</td>
+              <td>{{ member.Occupation}}</td>
+              <td>
+                    <a [routerLink]="['/members',member.MembershipNumber]">
+                        View
+                      </a>
+                      <a [routerLink]="['/members/edit',member.MembershipNumber]">
+                        Edit
+                      </a>
+                  <!-- <button type="button" (click)="onViewCLick()">Edit</button>
+                  <button type="button">View</button> -->
+            </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf='errorMessage'
+       class='alert alert-danger'>
+    Error: {{ errorMessage }}
+  </div>

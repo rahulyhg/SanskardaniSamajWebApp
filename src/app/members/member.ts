@@ -1,0 +1,18 @@
+export interface IMember {
+    Name: string,
+    FatherName: string,
+    Gender: string,
+    DOB: string,
+    IsMarried: boolean,
+    MarriageDate: string,
+    EmailId: string,
+    Occupation: string,
+    ContactNo: number,
+    MembershipNumber: number,
+    IdentifierName: string,
+    IdentifierMembershipNumber: string,
+    MembershipAppliedDate: string,
+    MembershipDate: string,
+    MembershipAmount: number,
+    ReceiptNumber: number,
+}
