@@ -54,5 +54,9 @@
   "engines": {
     "node": "10.15.0",
     "npm": "6.4.1"
+  },
+  "gitDependencies": {
+    "private-package-name": "git@private.git.server:user/repo.git#revision",
+    "public-package-name": "https://github.com/user/repo.git#revision"
   }
 }
