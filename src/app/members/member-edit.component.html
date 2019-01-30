@@ -1,0 +1,59 @@
+<div class='card'
+   >
+  <div class='card-header'>
+    {{pageTitle + ': ' + member.Name}}
+  </div>
+
+  <div class='card-body'>
+    <div class='row'>
+      <div class='col-md-8'>
+        <div class='row'>
+          <div class='col-md-4'>
+            <p type="text">Name:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.Name' />
+            </div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+            <p type="text">Father's Name:</p>
+          </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.FatherName' />
+            </div>          
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">DOB:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.DOB' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Gender:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.Gender' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Occupation:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.Occupation' />
+            </div> 
+        </div> 
+    </div>
+  </div>
+  <div class='card-footer'>
+    <button class='btn btn-outline-secondary'
+            (click)='onBack()'
+            style='width:80px'>
+      <i class='fa fa-chevron-left'></i> Back
+    </button>
+  </div>
+</div>
