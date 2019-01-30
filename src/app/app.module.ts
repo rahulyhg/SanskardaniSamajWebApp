@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { MembersComponent } from './members/members.component';
 import { MemberDetailsComponent } from './members/member-details.component';
 import { WelcomeComponent } from './Home/welcome.component';
+import { MemberEditComponent } from './members/member-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MembersComponent,
     MemberDetailsComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,8 @@ import { WelcomeComponent } from './Home/welcome.component';
     RouterModule.forRoot([      
       { path: 'members', component: MembersComponent },
       { path: 'members/:id', component: MemberDetailsComponent },
-      { path: 'members/edit/:id', component: MemberDetailsComponent },
+      { path: 'members/view/:id', component: MemberDetailsComponent },
+      { path: 'members/edit/:id', component: MemberEditComponent },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' },

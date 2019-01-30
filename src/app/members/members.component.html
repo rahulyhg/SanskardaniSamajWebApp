@@ -37,7 +37,7 @@
               <td>{{ member.Gender}}</td>
               <td>{{ member.Occupation}}</td>
               <td>
-                    <a [routerLink]="['/members',member.MembershipNumber]">
+                    <a [routerLink]="['/members/view',member.MembershipNumber]">
                         View
                       </a>
                       <a [routerLink]="['/members/edit',member.MembershipNumber]">
