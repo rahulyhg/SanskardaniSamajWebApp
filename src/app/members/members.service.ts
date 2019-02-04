@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
@@ -25,6 +25,21 @@ export class MembersService {
     return this.getMembers().pipe(
       map((products: IMember[]) => products.find(p => p.MembershipNumber === id))
     );
+  }
+
+  postMember(member:IMember){
+      const httpOptions ={
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+      } 
+      this.http.post(this.membersUrl, member, httpOptions).pipe( tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError));
+    
+  }
+
+  saveMember(member:IMember):boolean{
+      return true;
   }
 
   private handleError(err: HttpErrorResponse) {
