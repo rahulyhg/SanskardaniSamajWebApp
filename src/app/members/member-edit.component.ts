@@ -21,15 +21,13 @@ export class MemberEditComponent implements OnInit {
     private memberService: MembersService) {
     router.events.subscribe(
       (event: NavigationEvent): void => {
-
         console.log(router.url);
-
       }
-    );
-    //console.log(this.route.snapshot.paramMap.get('id'));
+    );    
   }
 
   ngOnInit(): void {
+    
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
       const id = +param;
