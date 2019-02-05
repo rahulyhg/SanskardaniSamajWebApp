@@ -31,12 +31,12 @@ constructor(private route: ActivatedRoute,
   ngOnInit(): void {
       const param = this.route.snapshot.paramMap.get('id');
   if (param) {
-    const id = +param;
+    const id = param;
     this.getMember(id);
     }
   }
 
-  getMember(id: number) {
+  getMember(id: string) {
     this.memberService.getMember(id).subscribe(
        member => this.member = member,
        error => this.errorMessage = <any>error);

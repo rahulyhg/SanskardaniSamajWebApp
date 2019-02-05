@@ -24,9 +24,5 @@ export class MembersComponent implements OnInit{
         this.memberService.getMembers().subscribe(
             members => this.members = members,
           error => this.errorMessage = <any>error);
-      }
-
-    onViewCLick(): void {
-        this.router.navigate(['/members',1]);
-      }
+      }    
 }

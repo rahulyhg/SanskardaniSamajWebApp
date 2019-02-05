@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IMember } from './member';
+import { Member } from './member';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from './members.service';
 import { Event as NavigationEvent } from "@angular/router";
@@ -13,7 +13,7 @@ export class MemberEditComponent implements OnInit {
 
   pageTitle = 'Member Edit View';
   errorMessage = '';
-  member: IMember | undefined;
+  member: Member | undefined;
   result: boolean = true;
 
   constructor(private route: ActivatedRoute,
@@ -27,15 +27,16 @@ export class MemberEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.member = new Member();
     const param = this.route.snapshot.paramMap.get('id');
+    console.log(param);
     if (param) {
-      const id = +param;
+      const id = param;
       this.getMember(id);
     }
   }
 
-  getMember(id: number) {
+  getMember(id: string) {
     this.memberService.getMember(id).subscribe(
       member => this.member = member,
       error => this.errorMessage = <any>error);

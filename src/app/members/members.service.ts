@@ -21,13 +21,13 @@ export class MembersService {
     );
   }
 
-  getMember(id: number): Observable<IMember | undefined> {
+  getMember(id: string): Observable<IMember | undefined> {
     return this.getMembers().pipe(
-      map((products: IMember[]) => products.find(p => p.MembershipNumber === id))
+      map((products: IMember[]) => products.find(p => p._id === id))
     );
   }
 
-  postMember(member:IMember){
+  postMember(member:IMember):boolean {
       const httpOptions ={
         headers: new HttpHeaders({
             'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export class MembersService {
       } 
       this.http.post(this.membersUrl, member, httpOptions).pipe( tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError));
-    
+    return true;
   }
 
   saveMember(member:IMember):boolean{

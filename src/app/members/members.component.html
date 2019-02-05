@@ -41,10 +41,10 @@
               <td>{{ member.Gender}}</td>
               <td>{{ member.Occupation}}</td>
               <td>
-                    <a [routerLink]="['/members/view',member.MembershipNumber]">
+                    <a [routerLink]="['/members/view',member._id]">
                         View
                       </a>
-                      <a [routerLink]="['/members/edit',member.MembershipNumber]">
+                      <a [routerLink]="['/members/edit',member._id]">
                         Edit
                       </a>
                   <!-- <button type="button" (click)="onViewCLick()">Edit</button>

@@ -25,9 +25,10 @@ import { MemberEditComponent } from './members/member-edit.component';
     FormsModule,
     RouterModule.forRoot([      
       { path: 'members', component: MembersComponent },
-      { path: 'members/:id', component: MemberDetailsComponent },
-      { path: 'members/view/:id', component: MemberDetailsComponent },
-      { path: 'members/edit/:id', component: MemberEditComponent },
+      { path: 'members/edit', component: MemberEditComponent },   
+      { path: 'members/:id', component: MemberDetailsComponent },       
+      { path: 'members/view/:id', component: MemberDetailsComponent },      
+      { path: 'members/edit/:id', component: MemberEditComponent },      
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
