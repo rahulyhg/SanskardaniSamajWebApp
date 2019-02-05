@@ -10,7 +10,7 @@ import { IMember } from './member';
 })
 
 export class MembersService {
-  private membersUrl = 'assets/members/members.json';
+  private membersUrl = 'https://ssmnodejsservice.herokuapp.com/api/members';
 
   constructor(private http: HttpClient) { }
 
