@@ -38,7 +38,7 @@ export class MembersService {
     return true;
   }
 
-  saveMember(member:IMember):boolean{
+  putMember(member:IMember):boolean{
       return true;
   }
 

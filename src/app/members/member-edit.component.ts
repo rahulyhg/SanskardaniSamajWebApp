@@ -29,10 +29,13 @@ export class MemberEditComponent implements OnInit {
   ngOnInit(): void {
     this.member = new Member();
     const param = this.route.snapshot.paramMap.get('id');
-    console.log(param);
     if (param) {
       const id = param;
       this.getMember(id);
+    }
+    else
+    {
+      this.pageTitle ="Add Member View"
     }
   }
 
@@ -47,7 +50,14 @@ export class MemberEditComponent implements OnInit {
   }
 
   onSave() {
-    this.result = this.memberService.saveMember(this.member);
+    if(this.member._id == "")
+    {
+    this.result = this.memberService.postMember(this.member);
+    }
+    else
+    {
+      this.result = this.memberService.putMember(this.member);
+    }
     if(this.result)
     {
       alert("Save Successfully!");
