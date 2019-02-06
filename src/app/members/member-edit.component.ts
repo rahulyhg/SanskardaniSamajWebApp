@@ -50,9 +50,10 @@ export class MemberEditComponent implements OnInit {
   }
 
   onSave() {
-    if(this.member._id == "")
+
+    if(this.member._id == undefined || this.member._id == "")
     {
-    this.result = this.memberService.postMember(this.member);
+      this.result = this.memberService.postMember(this.member);
     }
     else
     {
@@ -60,11 +61,11 @@ export class MemberEditComponent implements OnInit {
     }
     if(this.result)
     {
-      alert("Save Successfully!");
+      //alert("Save Successfully!");
     }
     else
     {
-      alert("Save failed!");
+     //alert("Save failed!");
     }
   }
 }

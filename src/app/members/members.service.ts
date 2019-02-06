@@ -32,10 +32,14 @@ export class MembersService {
         headers: new HttpHeaders({
             'Content-Type': 'application/json'
         })
-      } 
-      this.http.post(this.membersUrl, member, httpOptions).pipe( tap(data => console.log('All: ' + JSON.stringify(data))),
-      catchError(this.handleError));
-    return true;
+    };
+    this.http.post(this.membersUrl, member, httpOptions)
+      .subscribe(data => console.log('All: ' + JSON.stringify(data)),
+        err2 => {
+          alert("error at post");
+          console.log(err2);
+         });
+   return false;
   }
 
   putMember(member:IMember):boolean{
@@ -43,6 +47,7 @@ export class MembersService {
   }
 
   private handleError(err: HttpErrorResponse) {
+    //alert("Error");
     // in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console
     let errorMessage = '';
@@ -54,7 +59,7 @@ export class MembersService {
       // The response body may contain clues as to what went wrong,
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.error(errorMessage);
+    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

@@ -5,6 +5,8 @@
   <div class='card-body'>
     <div class='row'>
       <div class='col-md-8'>
+        <div><b><h5>Personal Information</h5></b></div>
+
         <div class='row'>
           <div class='col-md-4'>
             <p type="text">Name:</p>
@@ -26,7 +28,7 @@
               <p type="text">DOB:</p>
             </div>
           <div class='col-md-8'>
-                <input type='text' [(ngModel)]='member.DOB' />
+                <input type='date' [(ngModel)]='member.DOB' />
             </div>           
         </div>
         <div class='row'>
@@ -39,12 +41,158 @@
         </div>
         <div class='row'>
           <div class='col-md-4'>
+              <p type="text">Married:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='checkbox' [(ngModel)]='member.IsMarried' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Marriage Date:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='date' [(ngModel)]='member.MarriageDate' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Contact Number:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='number' [(ngModel)]='member.ContactNo' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Email Id:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='email' [(ngModel)]='member.EmailId' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
               <p type="text">Occupation:</p>
             </div>
           <div class='col-md-8'>
                 <input type='text' [(ngModel)]='member.Occupation' />
             </div> 
-        </div> 
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Membership Number:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' readonly [(ngModel)]='member.MembershipNumber' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Identifier Name:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.IdentifierName' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Identifier Membership Number:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.IdentifierMembershipNumber' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Membership Applied Date:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='date' [(ngModel)]='member.MembershipAppliedDate' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Membership Date:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='date' [(ngModel)]='member.MembershipDate' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Membership Amount:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='number' [(ngModel)]='member.MembershipAmount' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Receipt Number:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='number' [(ngModel)]='member.ReceiptNumber' />
+            </div>           
+        </div>
+        <div><b><h5>Address</h5></b></div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">House No.:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.Address.HouseNumber' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Address:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.Address.Address' />
+            </div>           
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <p type="text">PIN:</p>
+              </div>
+            <div class='col-md-8'>
+                  <input type='number' [(ngModel)]='member.Address.PIN' />
+              </div>           
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <p type="text">District:</p>
+              </div>
+            <div class='col-md-8'>
+                  <input type='text' [(ngModel)]='member.Address.District' />
+              </div>           
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <p type="text">State:</p>
+              </div>
+            <div class='col-md-8'>
+                  <input type='text' [(ngModel)]='member.Address.State' />
+              </div>           
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <p type="text">Country:</p>
+              </div>
+            <div class='col-md-8'>
+                  <input type='text' [(ngModel)]='member.Address.Country' />
+              </div>           
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <p type="text">Landmark:</p>
+              </div>
+            <div class='col-md-8'>
+                  <input type='text' [(ngModel)]='member.Address.Landmark' />
+              </div>           
+        </div>
+
     </div>
   </div>
   <div class='card-footer'>

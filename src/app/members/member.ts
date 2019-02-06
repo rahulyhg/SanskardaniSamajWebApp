@@ -1,5 +1,8 @@
+//import { Address } from 'cluster';
+import { IMemberAddress, MemberAddress } from './memberaddress';
+
 export interface IMember {
-    _id:string,
+    _id: string,
     Name: string,
     FatherName: string,
     Gender: string,
@@ -16,11 +19,12 @@ export interface IMember {
     MembershipDate: string,
     MembershipAmount: number,
     ReceiptNumber: number,
+    Address?: object | IMemberAddress,
 }
 
 export class Member implements IMember {
-    _id:string;
-    Name: string;    
+    _id: string;
+    Name: string;
     FatherName: string;
     Gender: string;
     DOB: string;
@@ -36,7 +40,9 @@ export class Member implements IMember {
     MembershipDate: string;
     MembershipAmount: number;
     ReceiptNumber: number;
+    Address?: object | IMemberAddress;
 
-    constructor(){}
+
+    constructor() { }
 
 }
