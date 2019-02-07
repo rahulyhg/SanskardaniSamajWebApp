@@ -42,7 +42,8 @@ export class Member implements IMember {
     ReceiptNumber: number;
     Address?: object | IMemberAddress;
 
-
-    constructor() { }
+    constructor() {
+        this.Address = new MemberAddress();
+     }
 
 }

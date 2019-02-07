@@ -16,4 +16,6 @@ export class MemberAddress implements IMemberAddress {
     State: string;
     Country: string;
     Landmark: string;
+
+    constructor() { }
 }

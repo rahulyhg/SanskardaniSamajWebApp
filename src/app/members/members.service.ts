@@ -33,6 +33,7 @@ export class MembersService {
             'Content-Type': 'application/json'
         })
     };
+    console.log(member);
     this.http.post(this.membersUrl, member, httpOptions)
       .subscribe(data => console.log('All: ' + JSON.stringify(data)),
         err2 => {
