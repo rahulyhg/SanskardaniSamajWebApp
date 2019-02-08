@@ -19,7 +19,7 @@ export interface IMember {
     MembershipDate: string,
     MembershipAmount: number,
     ReceiptNumber: number,
-    Address?: object | IMemberAddress,
+    Address: IMemberAddress,
 }
 
 export class Member implements IMember {
@@ -40,7 +40,7 @@ export class Member implements IMember {
     MembershipDate: string;
     MembershipAmount: number;
     ReceiptNumber: number;
-    Address?: object | IMemberAddress;
+    Address: IMemberAddress;
 
     constructor() {
         this.Address = new MemberAddress();
