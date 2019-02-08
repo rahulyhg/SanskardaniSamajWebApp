@@ -10,19 +10,47 @@ import { MembersService } from './members.service';
 })
 
 export class MembersComponent implements OnInit{
+    pageTitle = 'Members List';    
     errorMessage = '';
     members: IMember[];
-    ngOnInit(): void {
-        this.getMembers();
-    }
+    filteredMembers: IMember[] = [];    
+
+    _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredMembers = this.listFilter ? this.performFilter(this.listFilter) : this.members;
+  }
 
     constructor(private router: Router,
         private memberService: MembersService) {
+            this.getMembers();
       }
+
+      ngOnInit(): void {
+        //this.getMembers();
+    }
 
       getMembers() {
         this.memberService.getMembers().subscribe(
-            members => this.members = members,
+            members => {
+                this.members = members;
+                this.filteredMembers =this.members;
+        },
           error => this.errorMessage = <any>error);
-      }    
+      }
+
+      performFilter(filterBy: string): IMember[] {
+        filterBy = filterBy.toLocaleLowerCase();
+        return this.members.filter((member: IMember) =>
+          member.Name.toLocaleLowerCase().indexOf(filterBy) !== -1);
+      }
+
+      onDelete(id:string){
+        if(window.confirm('Are sure you want to delete this member ?')){
+            this.memberService.deleteMember(id);
+           }                
+      }
 }

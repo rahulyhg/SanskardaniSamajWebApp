@@ -39,12 +39,25 @@ export class MembersService {
         err2 => {
           alert("error at post");
           console.log(err2);
+          return false;
          });
    return false;
   }
 
   putMember(member:IMember):boolean{
       return true;
+  }
+
+  deleteMember(id:string):boolean
+  {
+    this.http.delete(this.membersUrl+'/'+ id)
+      .subscribe(data => console.log('All: ' + JSON.stringify(data)),
+        err2 => {
+          alert("error at post");
+          console.log(err2);
+          return false;
+         });
+   return false;
   }
 
   private handleError(err: HttpErrorResponse) {

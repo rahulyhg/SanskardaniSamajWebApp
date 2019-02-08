@@ -11,7 +11,7 @@ export interface IMember {
     MarriageDate: string,
     EmailId: string,
     Occupation: string,
-    ContactNo: number,
+    ContactNo: string,
     MembershipNumber: number,
     IdentifierName: string,
     IdentifierMembershipNumber: string,
@@ -32,7 +32,7 @@ export class Member implements IMember {
     MarriageDate: string;
     EmailId: string;
     Occupation: string;
-    ContactNo: number;
+    ContactNo: string;
     MembershipNumber: number;
     IdentifierName: string;
     IdentifierMembershipNumber: string;

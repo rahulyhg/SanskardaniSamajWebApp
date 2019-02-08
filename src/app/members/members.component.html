@@ -1,28 +1,28 @@
 <div class='card'>
     <div class='card-header'>
-      <!-- {{pageTitle}} -->
+      {{pageTitle}}       
+     <a [routerLink]="['/members/edit']" class="right">Add</a>  
     </div>
     <div class='card-body'>
       <div class='row'>
         <div class='col-md-2'>Filter by:</div>
-        <div class='col-md-4'>
-          <input type='text'/>
-                  <!-- [(ngModel)]='listFilter' /> -->
+        <div class='col-md-2'>
+          <input type='text'
+                  [(ngModel)]='listFilter' />
         </div>
-        <div class='col-md-4'>
-          <a [routerLink]="['/members/edit']">Add</a>
-                  <!-- [(ngModel)]='listFilter' /> -->
-        </div>
+        <!-- <div class='col-md-4'>
+          <a [routerLink]="['/members/edit']">Add</a>                 
+        </div>         -->
       </div>
-      <!-- <div class='row'
+      <div class='row'
            *ngIf='listFilter'>
         <div class='col-md-6'>
            <h4>Filtered by: {{listFilter}}</h4>
         </div>
-      </div> -->
+      </div>
       <div class='table-responsive'>
-        <table class='table'
-               *ngIf='members && members.length'>
+        <table class="table table-striped table-hover"
+               *ngIf='filteredMembers && filteredMembers.length'>
           <thead>
             <tr>              
               <th>Name</th>
@@ -34,7 +34,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor='let member of members'>              
+            <tr *ngFor='let member of filteredMembers'>               
               <td>{{ member.Name }}</td>
               <td>{{ member.FatherName }}</td>
               <td>{{ member.DOB }}</td>
@@ -46,7 +46,8 @@
                       </a>
                       <a [routerLink]="['/members/edit',member._id]">
                         Edit
-                      </a>
+                      </a>                     
+                      <a [routerLink]="" (click)="onDelete(member._id)">Delete</a>
                   <!-- <button type="button" (click)="onViewCLick()">Edit</button>
                   <button type="button">View</button> -->
             </td>

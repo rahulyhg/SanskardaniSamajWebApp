@@ -11,7 +11,7 @@ import { isBoolean } from 'util';
 })
 export class MemberEditComponent implements OnInit {
 
-  pageTitle = 'Member Edit View';
+  pageTitle = 'Edit Member';
   errorMessage = '';
   member: Member | undefined;
   result: boolean = true;
@@ -35,7 +35,7 @@ export class MemberEditComponent implements OnInit {
     }
     else
     {
-      this.pageTitle ="Add Member View"
+      this.pageTitle ="Add Member"
     }
   }
 
