@@ -22,8 +22,9 @@ export class MembersService {
   }
 
   getMember(id: string): Observable<IMember | undefined> {
-    return this.getMembers().pipe(
-      map((products: IMember[]) => products.find(p => p._id === id))
+    return this.http.get<IMember>(this.membersUrl +'/'+ id).pipe(
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
     );
   }
 
