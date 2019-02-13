@@ -1,5 +1,7 @@
 //import { Address } from 'cluster';
 import { IMemberAddress, MemberAddress } from './memberaddress';
+import { FamilyInfo, IFamilyInfo } from './familyinfo';
+
 
 export interface IMember {
     _id: string,
@@ -20,6 +22,7 @@ export interface IMember {
     MembershipAmount: number,
     ReceiptNumber: number,
     Address: IMemberAddress,
+    FamilyInfo : IFamilyInfo[],
 }
 
 export class Member implements IMember {
@@ -41,6 +44,7 @@ export class Member implements IMember {
     MembershipAmount: number;
     ReceiptNumber: number;
     Address: IMemberAddress;
+    FamilyInfo : FamilyInfo[];
 
     constructor() {
         this.Address = new MemberAddress();
