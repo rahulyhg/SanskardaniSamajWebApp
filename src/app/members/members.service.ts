@@ -28,7 +28,7 @@ export class MembersService {
     );
   }
 
-  postMember(member:IMember):boolean {
+  postMember(member:IMember):boolean { 
       const httpOptions ={
         headers: new HttpHeaders({
             'Content-Type': 'application/json'
