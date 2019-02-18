@@ -1,0 +1,85 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle + ': ' + member.Name}}
+  </div>
+  <div class='form-group'>
+    <div class='row'>
+      <div class='col-md-8'>
+        <div><b><h5>Family Information</h5></b></div>
+
+        <div class='row'>
+          <div class='col-md-4'>
+            <p type="text">Name:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.Name' />
+            </div>
+        </div>        
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">DOB:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='date' [(ngModel)]='member.DOB' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Gender:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.Gender' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Married:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='checkbox' [(ngModel)]='member.IsMarried' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Dependent:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='checkbox' [(ngModel)]='member.IsDependent' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Occupation:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.Occupation' />
+            </div> 
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Membership Number:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' readonly [(ngModel)]='member.MembershipNumber' />
+            </div>           
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
+              <p type="text">Relationship:</p>
+            </div>
+          <div class='col-md-8'>
+                <input type='text' [(ngModel)]='member.Relationship' />
+            </div>           
+        </div>            
+    </div>
+  </div>
+  <div class='card-footer'>
+    <button class='btn btn-outline-secondary'
+            (click)='close()'
+            style='width:80px'> Cancel
+    </button>
+    <button class='btn btn-outline-secondary' 
+            (click)='add()'
+            style='width:80px;margin: 0px 4px'> Add
+    </button>
+  </div>  
