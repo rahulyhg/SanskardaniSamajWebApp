@@ -68,21 +68,43 @@ export class MemberEditComponent implements OnInit {
     }
   }
 
-  openDialog() {
+  openDialog(familyInfo: IFamilyInfo) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
+    console.log(familyInfo);
+    if (familyInfo != null) {
+      dialogConfig.data = familyInfo;
+    }
 
     let dialogRef = this.dialog.open(FamilyinfoComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
 
-      if (result instanceof FamilyInfo) {
-
-        this.familyMembers.push(result as IFamilyInfo);
+      if (result instanceof FamilyInfo) {        
+        // var familyinfo = this.familyMembers.find(x => x._id == (result as IFamilyInfo)._id );
+        // if (familyinfo == null || this.familyMembers.length == 0) {
+        //   (result as IFamilyInfo)._id = this.familyMembers[this.familyMembers.length - 1]._id + 1;
+          this.familyMembers.push(result as IFamilyInfo);
+        //}
       }
     });
+  }
+
+  addFamilyInfo() {
+    this.openDialog(null);
+  }
+
+  editFamilyInfo(familyInfo: IFamilyInfo) {
+    this.openDialog(familyInfo);
+  }
+
+  deleteFamilyInfo(id: number) {
+    var familyinfo = this.familyMembers.find(x => x._id == id);
+    if (familyinfo != null) {
+      this.familyMembers.splice(this.familyMembers.indexOf(familyinfo), 1);
+    }
   }
 }

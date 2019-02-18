@@ -13,11 +13,19 @@ export class FamilyinfoComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<FamilyinfoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      console.log(this.data);
+     }
 
   ngOnInit() {
-    this.member = new FamilyInfo();
-    this.member.IsMarried =false;
+    if (this.data instanceof FamilyInfo) {
+      this.member = this.data as IFamilyInfo;
+    }
+    else {
+      this.member = new FamilyInfo();
+      this.member.IsMarried = false;
+      this.member._id =0;
+    }
   }
 
   add() {
