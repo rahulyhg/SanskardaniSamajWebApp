@@ -8,8 +8,8 @@ import { FamilyInfo } from '../familyinfo';
   styleUrls: ['./familyinfo.component.css']
 })
 export class FamilyinfoComponent implements OnInit {
-
-  member:FamilyInfo |undefined;
+  pageTitle:string;
+  member:FamilyInfo;
 
   constructor(
     public dialogRef: MatDialogRef<FamilyinfoComponent>,
@@ -19,7 +19,7 @@ export class FamilyinfoComponent implements OnInit {
     this.member = new FamilyInfo();
   }
 
-  Add() {
+  add() {
     this.dialogRef.close(this.member);
 }
 
