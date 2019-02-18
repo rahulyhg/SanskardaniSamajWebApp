@@ -45,8 +45,22 @@ export class MembersService {
    return false;
   }
 
-  putMember(member:IMember):boolean{
-      return true;
+  putMember(member: IMember): boolean { 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    alert("Control came to edit : "+this.membersUrl + "/" + member._id)
+    console.log(member);
+    this.http.put(this.membersUrl + "/" + member._id, member, httpOptions)
+      .subscribe(data => console.log('All: ' + JSON.stringify(data)),
+        err2 => {
+          alert("error at post");
+          console.log(err2);
+          return false;
+        });
+    return false;
   }
 
   deleteMember(id:string):boolean
