@@ -55,6 +55,7 @@ export class MemberEditComponent implements OnInit {
   onSave() {
 
     if (this.member._id == undefined || this.member._id == "") {
+      this.member.FamilyInfo = this.familyMembers;
       this.result = this.memberService.postMember(this.member);
     }
     else {
