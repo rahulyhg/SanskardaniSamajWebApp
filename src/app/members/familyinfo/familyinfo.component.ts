@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FamilyInfo } from '../familyinfo';
+import { FamilyInfo, IFamilyInfo } from '../familyinfo';
 
 @Component({
   selector: 'app-familyinfo',
@@ -8,8 +8,8 @@ import { FamilyInfo } from '../familyinfo';
   styleUrls: ['./familyinfo.component.css']
 })
 export class FamilyinfoComponent implements OnInit {
-  pageTitle:string;
-  member:FamilyInfo;
+  pageTitle: string;
+  member: IFamilyInfo;
 
   constructor(
     public dialogRef: MatDialogRef<FamilyinfoComponent>,
@@ -17,13 +17,14 @@ export class FamilyinfoComponent implements OnInit {
 
   ngOnInit() {
     this.member = new FamilyInfo();
+    this.member.IsMarried =false;
   }
 
   add() {
     this.dialogRef.close(this.member);
-}
+  }
 
-close() {
+  close() {
     this.dialogRef.close();
-}
+  }
 }

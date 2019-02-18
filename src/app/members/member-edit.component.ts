@@ -6,7 +6,7 @@ import { Event as NavigationEvent } from "@angular/router";
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { isBoolean } from 'util';
 import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
-import { FamilyInfo } from './familyinfo';
+import { FamilyInfo, IFamilyInfo } from './familyinfo';
 
 @Component({
   templateUrl: './member-edit.component.html',
@@ -17,7 +17,7 @@ export class MemberEditComponent implements OnInit {
   pageTitle = 'Edit Member';
   errorMessage = '';
   member: Member | undefined;
-  familyMembers:FamilyInfo[] | undefined;
+  familyMembers: IFamilyInfo[] = [];
   result: boolean = true;
 
   constructor(public dialog: MatDialog, private route: ActivatedRoute,
@@ -32,7 +32,6 @@ export class MemberEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.member = new Member();
-    this.familyMembers = new Array();
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
       const id = param;
@@ -76,11 +75,14 @@ export class MemberEditComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
 
-    let dialogRef = this.dialog.open(FamilyinfoComponent,dialogConfig);
-     
+    let dialogRef = this.dialog.open(FamilyinfoComponent, dialogConfig);
+
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
-      //this.dialogResult = result;
+
+      if (result instanceof FamilyInfo) {
+
+        this.familyMembers.push(result as IFamilyInfo);
+      }
     });
   }
 }
