@@ -7,6 +7,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { isBoolean } from 'util';
 import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
 import { FamilyInfo, IFamilyInfo } from './familyinfo';
+import { state } from '../models/state.enum';
 
 @Component({
   templateUrl: './member-edit.component.html',
@@ -84,12 +85,25 @@ export class MemberEditComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
 
-      if (result instanceof FamilyInfo) {        
-        // var familyinfo = this.familyMembers.find(x => x._id == (result as IFamilyInfo)._id );
-        // if (familyinfo == null || this.familyMembers.length == 0) {
-        //   (result as IFamilyInfo)._id = this.familyMembers[this.familyMembers.length - 1]._id + 1;
-          this.familyMembers.push(result as IFamilyInfo);
-        //}
+      if (result instanceof FamilyInfo) {
+        if ((result as IFamilyInfo)._id.toString().length > 2) {
+          (result as IFamilyInfo).State = state.Modified;
+        }
+        else {
+          if ((result as IFamilyInfo).State != state.Added) {
+            if(this.familyMembers.length == 0)
+            {
+              (result as IFamilyInfo)._id = 1;
+            }
+            else
+            {
+              (result as IFamilyInfo)._id = this.familyMembers[this.familyMembers.length - 1]._id + 1;
+            }
+            
+            (result as IFamilyInfo).State = state.Added;
+            this.familyMembers.push(result as IFamilyInfo);
+          }
+        }
       }
     });
   }
@@ -105,7 +119,13 @@ export class MemberEditComponent implements OnInit {
   deleteFamilyInfo(id: number) {
     var familyinfo = this.familyMembers.find(x => x._id == id);
     if (familyinfo != null) {
-      this.familyMembers.splice(this.familyMembers.indexOf(familyinfo), 1);
+      if (familyinfo._id.toString().length > 2) {
+        familyinfo.State = state.Deleted;
+        familyinfo.IsDeleted =true;
+      }
+      else {
+        this.familyMembers.splice(this.familyMembers.indexOf(familyinfo), 1);
+      }
     }
   }
 }

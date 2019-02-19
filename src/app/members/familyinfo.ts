@@ -1,3 +1,5 @@
+import { state } from '../models/state.enum';
+
 export interface IFamilyInfo {
     _id: number,
     Name: string,
@@ -9,9 +11,13 @@ export interface IFamilyInfo {
     IsDependent: boolean,
     Occupation: string,
     IsMarried: boolean,
+    State:state,
+    IsDeleted:boolean
 }
 
 export class FamilyInfo implements IFamilyInfo {
+    IsDeleted: boolean;
+    State: state;
     _id: number;
     Name: string;
     IsMember: boolean;
@@ -23,5 +29,6 @@ export class FamilyInfo implements IFamilyInfo {
     Occupation: string;
     IsMarried: boolean;
 
-    constructor() { }
+    constructor() {
+     }
 } 
