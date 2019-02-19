@@ -18,7 +18,7 @@ export class FamilyinfoComponent implements OnInit {
      }
 
   ngOnInit() {
-    
+    this.pageTitle = "Family Info";
     if (this.data != null) {
       this.member = this.data as FamilyInfo;
     }
