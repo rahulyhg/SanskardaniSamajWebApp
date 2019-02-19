@@ -1,4 +1,4 @@
-export enum state {
+export enum state {    
     Added,
     Modified,
     Deleted

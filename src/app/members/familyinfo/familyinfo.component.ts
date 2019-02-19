@@ -18,13 +18,13 @@ export class FamilyinfoComponent implements OnInit {
      }
 
   ngOnInit() {
+    
     if (this.data instanceof FamilyInfo) {
-      this.member = this.data as IFamilyInfo;
+      this.member = this.data as FamilyInfo;
     }
-    else {
+    else {      
       this.member = new FamilyInfo();
-      this.member.IsMarried = false;
-      this.member._id =0;
+      this.member.IsMarried = false;      
     }
   }
 

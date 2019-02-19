@@ -45,7 +45,7 @@ export class MemberEditComponent implements OnInit {
 
   getMember(id: string) {
     this.memberService.getMember(id).subscribe(
-      (member)=>{
+      (member) => {
         this.member = member;
         this.familyMembers = this.member.FamilyInfo;
       },
@@ -79,7 +79,6 @@ export class MemberEditComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    console.log(familyInfo);
     if (familyInfo != null) {
       dialogConfig.data = familyInfo;
     }
@@ -89,22 +88,19 @@ export class MemberEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result instanceof FamilyInfo) {
-        if ((result as IFamilyInfo)._id.toString().length > 2) {
-          (result as IFamilyInfo).State = state.Modified;
+        if ((result as IFamilyInfo)._id == undefined) {
+          if (this.familyMembers.length == 0) {
+            (result as IFamilyInfo)._id = "1";
+          }
+          else {
+            (result as IFamilyInfo)._id = this.familyMembers[this.familyMembers.length - 1]._id + 1;
+          }
+          
+          this.familyMembers.push(result as IFamilyInfo);
         }
         else {
-          if ((result as IFamilyInfo).State != state.Added) {
-            if(this.familyMembers.length == 0)
-            {
-              (result as IFamilyInfo)._id = 1;
-            }
-            else
-            {
-              (result as IFamilyInfo)._id = this.familyMembers[this.familyMembers.length - 1]._id + 1;
-            }
-            
-            (result as IFamilyInfo).State = state.Added;
-            this.familyMembers.push(result as IFamilyInfo);
+          if ((result as IFamilyInfo)._id.length > 2) {
+            (result as IFamilyInfo).IsEdited = true;
           }
         }
       }
@@ -119,12 +115,11 @@ export class MemberEditComponent implements OnInit {
     this.openDialog(familyInfo);
   }
 
-  deleteFamilyInfo(id: number) {
+  deleteFamilyInfo(id: string) {
     var familyinfo = this.familyMembers.find(x => x._id == id);
     if (familyinfo != null) {
       if (familyinfo._id.toString().length > 2) {
-        familyinfo.State = state.Deleted;
-        familyinfo.IsDeleted =true;
+        familyinfo.IsDeleted = true;
       }
       else {
         this.familyMembers.splice(this.familyMembers.indexOf(familyinfo), 1);
