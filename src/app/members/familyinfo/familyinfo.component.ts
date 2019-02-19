@@ -19,7 +19,7 @@ export class FamilyinfoComponent implements OnInit {
 
   ngOnInit() {
     
-    if (this.data instanceof FamilyInfo) {
+    if (this.data != null) {
       this.member = this.data as FamilyInfo;
     }
     else {      
