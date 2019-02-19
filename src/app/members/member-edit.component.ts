@@ -44,7 +44,10 @@ export class MemberEditComponent implements OnInit {
 
   getMember(id: string) {
     this.memberService.getMember(id).subscribe(
-      member => this.member = member,
+      (member)=>{
+        this.member = member;
+        this.familyMembers = this.member.FamilyInfo;
+      },
       error => this.errorMessage = <any>error);
   }
 

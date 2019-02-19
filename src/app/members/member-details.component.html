@@ -69,6 +69,7 @@
           <div class='col-md-4'>Receipt Number:</div>
           <div class='col-md-8'>{{member.ReceiptNumber}}</div>           
         </div>
+        <hr />
         <div><b><h5>Address</h5></b></div>
         <div class='row'>
           <div class='col-md-4'>House No.:</div>
@@ -98,6 +99,31 @@
             <div class='col-md-4'>Landmark:</div>
             <div class='col-md-8'>{{member.Address.Landmark}}</div>           
         </div> 
+        <hr />
+        <div><b><h5>Family Members</h5></b></div>
+          <div>
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Relationship</th>
+                  <th>DOB</th>
+                  <th>Occupation</th>
+                  <th>Membership Number</th>
+                  <!-- <th></th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let familyinfo of member.FamilyInfo'>
+                  <td>{{ familyinfo.Name }}</td>
+                  <td>{{ familyinfo.Relationship }}</td>
+                  <td>{{ familyinfo.DOB }}</td>
+                  <td>{{ familyinfo.Occupation }}</td>
+                  <td>{{ familyinfo.MembershipNumber }}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
   </div>
   </div>
   <div class='card-footer'>
