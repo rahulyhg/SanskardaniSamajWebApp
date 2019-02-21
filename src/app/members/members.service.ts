@@ -36,7 +36,10 @@ export class MembersService {
     };
     console.log(member);
     this.http.post(this.membersUrl, member, httpOptions)
-      .subscribe(data => console.log('All: ' + JSON.stringify(data)),
+      .subscribe(data => {
+        console.log('All: ' + JSON.stringify(data));
+        alert("date saved successfully.");
+      },
         err2 => {
           alert("error at post");
           console.log(err2);
@@ -51,10 +54,12 @@ export class MembersService {
         'Content-Type': 'application/json',
       })
     };
-    alert("Control came to edit : "+this.membersUrl + "/" + member._id)
     console.log(member);
     this.http.put(this.membersUrl + "/" + member._id, member, httpOptions)
-      .subscribe(data => console.log('All: ' + JSON.stringify(data)),
+      .subscribe(data => {
+        console.log('All: ' + JSON.stringify(data));
+          alert("date saved successfully.");
+      },
         err2 => {
           alert("error at post");
           console.log(err2);
