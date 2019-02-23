@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
 import { IMember } from './member';
+import { IResponse } from './response';
 
 @Injectable({
   providedIn: 'root'
@@ -14,41 +15,57 @@ export class MembersService {
 
   constructor(private http: HttpClient) { }
 
-  getMembers(): Observable<IMember[]> {
-    return this.http.get<IMember[]>(this.membersUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+  getMembers(): Observable<IResponse> {
+    return this.http.get<IResponse>(this.membersUrl).pipe(
+      tap(data => { }
+        //console.log('All: ' + JSON.stringify(data))
+      ),
       catchError(this.handleError)
     );
   }
 
-  getMember(id: string): Observable<IMember | undefined> {
-    return this.http.get<IMember>(this.membersUrl +'/'+ id).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+  getMember(id: string): Observable<IResponse | undefined> {
+    return this.http.get<IResponse>(this.membersUrl + '/' + id).pipe(
+      tap(data => { }
+        //console.log('All: ' + JSON.stringify(data))
+      ),
       catchError(this.handleError)
     );
   }
 
-  postMember(member:IMember):boolean { 
-      const httpOptions ={
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json'
-        })
+  postMember(member: IMember): boolean {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
     };
-    console.log(member);
+    // console.log(member);
     this.http.post(this.membersUrl, member, httpOptions)
-      .subscribe(data => {
-        console.log('All: ' + JSON.stringify(data));
-        alert("date saved successfully.");
+      .subscribe(r => {
+        // console.log('All: ' + JSON.stringify(data));
+        var resp = <IResponse>r;
+        if (resp.StatusCode == 100) {
+          alert("date saved successfully.");
+        }
+        else{
+          alert(JSON.stringify(resp));
+          console.log(resp);
+        }
       },
         err2 => {
-          alert("error at post");
+          if (err2.error) {
+            alert(JSON.stringify(err2.error));
+          }
+          else {
+            alert(JSON.stringify(err2));
+          }
           console.log(err2);
           return false;
-         });
-   return false;
+        });
+    return false;
   }
 
-  putMember(member: IMember): boolean { 
+  putMember(member: IMember): boolean {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -57,27 +74,52 @@ export class MembersService {
     console.log(member);
     this.http.put(this.membersUrl + "/" + member._id, member, httpOptions)
       .subscribe(data => {
-        console.log('All: ' + JSON.stringify(data));
+        // console.log('All: ' + JSON.stringify(data));
+        var resp = <IResponse>data;
+        if (resp.StatusCode == 100) {
           alert("date saved successfully.");
+        }
+        else {
+          alert(JSON.stringify(resp));
+          console.log(resp);
+        }
       },
         err2 => {
-          alert("error at post");
+          if (err2.error) {
+            alert(JSON.stringify(err2.error));
+          }
+          else {
+            alert(JSON.stringify(err2));
+          }
           console.log(err2);
           return false;
         });
     return false;
   }
 
-  deleteMember(id:string):boolean
-  {
-    this.http.delete(this.membersUrl+'/'+ id)
-      .subscribe(data => console.log('All: ' + JSON.stringify(data)),
+  deleteMember(id: string): boolean {
+    this.http.delete(this.membersUrl + '/' + id)
+      .subscribe(data => {
+        var resp = <IResponse>data;
+        if (resp.StatusCode == 100) {
+          alert("Member deleted successfully.");
+        }
+        else {
+          alert(JSON.stringify(resp));
+          console.log(resp);
+        }
+      },
         err2 => {
-          alert("error at post");
+          if (err2.error) {
+            alert(JSON.stringify(err2.error));
+          }
+          else {
+            alert(JSON.stringify(err2));
+          }
           console.log(err2);
           return false;
-         });
-   return false;
+        });
+    return false;
   }
 
   private handleError(err: HttpErrorResponse) {

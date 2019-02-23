@@ -35,9 +35,15 @@ export class MembersComponent implements OnInit {
 
   getMembers() {
     this.memberService.getMembers().subscribe(
-      members => {
-        this.members = members;
-        this.filteredMembers = this.members;
+      response => {
+        if (response.StatusCode == 100) {
+          this.members = <IMember[]>response.Data;
+          this.filteredMembers = this.members;
+        }
+        else {
+          alert(console.log(response.Message));
+          console.log(response.Data);
+        }
       },
       error => this.errorMessage = <any>error);
   }

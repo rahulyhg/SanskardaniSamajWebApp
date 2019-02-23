@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from './member';
+import { Member, IMember } from './member';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from './members.service';
 import { Event as NavigationEvent } from "@angular/router";
@@ -45,9 +45,15 @@ export class MemberEditComponent implements OnInit {
 
   getMember(id: string) {
     this.memberService.getMember(id).subscribe(
-      (member) => {
-        this.member = member;
-        this.familyMembers = this.member.FamilyInfo;
+      response => {
+        if (response.StatusCode == 100) {
+          this.member = <IMember>response.Data;
+          this.familyMembers = this.member.FamilyInfo;
+        }
+        else {
+          alert(console.log(response.Message));
+          console.log(response.Data);
+        }
       },
       error => this.errorMessage = <any>error);
   }

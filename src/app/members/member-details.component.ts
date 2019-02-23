@@ -38,8 +38,16 @@ constructor(private route: ActivatedRoute,
 
   getMember(id: string) {
     this.memberService.getMember(id).subscribe(
-       member => this.member = member,
-       error => this.errorMessage = <any>error);
+      response => {
+        if (response.StatusCode == 100) {
+          this.member = <IMember>response.Data;
+        }
+        else {
+          alert(console.log(response.Message));
+          console.log(response.Data);
+        }
+      },
+      error => this.errorMessage = <any>error);
   }
 
   onBack(): void {
