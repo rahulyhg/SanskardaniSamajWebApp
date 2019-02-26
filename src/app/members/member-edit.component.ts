@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from './member';
+import { Member, IMember } from './member';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from './members.service';
 import { Event as NavigationEvent } from "@angular/router";
@@ -45,9 +45,15 @@ export class MemberEditComponent implements OnInit {
 
   getMember(id: string) {
     this.memberService.getMember(id).subscribe(
-      (member) => {
-        this.member = member;
-        this.familyMembers = this.member.FamilyInfo;
+      response => {
+        if (response.StatusCode == 100) {
+          this.member = <IMember>response.Data;
+          this.familyMembers = this.member.FamilyInfo;
+        }
+        else {
+          alert(console.log(response.Message));
+          console.log(response.Data);
+        }
       },
       error => this.errorMessage = <any>error);
   }
@@ -57,12 +63,13 @@ export class MemberEditComponent implements OnInit {
   }
 
   onSave() {
+    this.member.FamilyInfo = this.familyMembers;
 
     if (this.member._id == undefined || this.member._id == "") {
-      this.member.FamilyInfo = this.familyMembers;
       this.result = this.memberService.postMember(this.member);
     }
     else {
+      console.log(this.member.FamilyInfo);
       this.result = this.memberService.putMember(this.member);
     }
     if (this.result) {
@@ -85,22 +92,42 @@ export class MemberEditComponent implements OnInit {
 
     let dialogRef = this.dialog.open(FamilyinfoComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(result2 => {
+      let result = result2 as FamilyInfo;
+      if (result != null) {
+        console.log("came to instanceof FamilyInfo : ");
 
-      if (result instanceof FamilyInfo) {
-        if ((result as IFamilyInfo)._id == undefined) {
+        if (result._id == undefined) {
+
           if (this.familyMembers.length == 0) {
-            (result as IFamilyInfo)._id = "1";
+            result._id = "1";
           }
           else {
-            (result as IFamilyInfo)._id = this.familyMembers[this.familyMembers.length - 1]._id + 1;
+
+            var items = this.familyMembers.filter(t => t._id.length <= 2);
+            if (items.length == 0) {
+              result._id = "1";
+            }
+            else {
+              items = items.sort((t1, t2) => {
+                if (parseInt(t1._id) < parseInt(t2._id)) {
+                  return 1;
+                }
+                else {
+                  return -1;
+                }
+              });
+
+              result._id = (parseInt(items[0]._id) + 1) + "";
+
+            }
+
           }
-          
-          this.familyMembers.push(result as IFamilyInfo);
+          this.familyMembers.push(result);
         }
         else {
-          if ((result as IFamilyInfo)._id.length > 2) {
-            (result as IFamilyInfo).IsEdited = true;
+            if (result._id.length > 2) {
+            result.IsEdited = true;
           }
         }
       }

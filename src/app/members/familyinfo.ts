@@ -30,5 +30,7 @@ export class FamilyInfo implements IFamilyInfo {
     IsMarried: boolean;
 
     constructor() {
+        this.IsDeleted = false;
+        this.IsEdited = false;
      }
 } 

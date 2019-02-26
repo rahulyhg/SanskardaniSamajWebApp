@@ -15,8 +15,6 @@ export interface IMember {
     Occupation: string,
     ContactNo: string,
     MembershipNumber: number,
-    IdentifierName: string,
-    IdentifierMembershipNumber: string,
     MembershipAppliedDate: string,
     MembershipDate: string,
     MembershipAmount: number,
@@ -37,8 +35,6 @@ export class Member implements IMember {
     Occupation: string;
     ContactNo: string;
     MembershipNumber: number;
-    IdentifierName: string;
-    IdentifierMembershipNumber: string;
     MembershipAppliedDate: string;
     MembershipDate: string;
     MembershipAmount: number;
