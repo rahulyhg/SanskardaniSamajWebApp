@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button'
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button'
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import {
   MatDatepickerModule,
@@ -16,7 +16,7 @@ import {
   MatTableModule,
   MatToolbarModule
 } from "@angular/material";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppComponent } from './app.component';
 import { MembersComponent } from './members/members.component';
@@ -24,6 +24,8 @@ import { MemberDetailsComponent } from './members/member-details.component';
 import { WelcomeComponent } from './Home/welcome.component';
 import { MemberEditComponent } from './members/member-edit.component';
 import { FamilyinfoComponent } from './members/familyinfo/familyinfo.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { FamilyinfoComponent } from './members/familyinfo/familyinfo.component';
     MemberDetailsComponent,
     WelcomeComponent,
     MemberEditComponent,
-    FamilyinfoComponent
+    FamilyinfoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -56,20 +59,21 @@ import { FamilyinfoComponent } from './members/familyinfo/familyinfo.component';
     MatDatepickerModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([      
+    RouterModule.forRoot([
+      { path: 'login', component: LoginComponent },
       { path: 'members', component: MembersComponent },
-      { path: 'members/edit', component: MemberEditComponent },   
-      { path: 'members/:id', component: MemberDetailsComponent },       
-      { path: 'members/view/:id', component: MemberDetailsComponent },      
-      { path: 'members/edit/:id', component: MemberEditComponent },      
+      { path: 'members/edit', component: MemberEditComponent },
+      { path: 'members/:id', component: MemberDetailsComponent },
+      { path: 'members/view/:id', component: MemberDetailsComponent },
+      { path: 'members/edit/:id', component: MemberEditComponent },
       { path: 'welcome', component: WelcomeComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '', component: WelcomeComponent, canActivate: [AuthGuard] },
+      { path: '**', redirectTo: '' },
     ]),
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
-  entryComponents:[FamilyinfoComponent]
+  entryComponents: [FamilyinfoComponent]
 })
 export class AppModule { }

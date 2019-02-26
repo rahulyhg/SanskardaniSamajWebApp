@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from './login/authentication.service';
+import { Router } from '@angular/router';
+import { User } from './models/user';
+import { Role } from './models/role';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +11,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   pageTitle = 'Sanskardani Samaj';
+  currentUser: User;
+
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService) {
+
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
+  }
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+  }
 }
