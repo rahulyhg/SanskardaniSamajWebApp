@@ -67,7 +67,7 @@ import { AuthGuard } from './guard/auth.guard';
       { path: 'members/view/:id', component: MemberDetailsComponent },
       { path: 'members/edit/:id', component: MemberEditComponent },
       { path: 'welcome', component: WelcomeComponent },
-      { path: '', component: WelcomeComponent, canActivate: [AuthGuard] },
+      { path: '', component: WelcomeComponent },
       { path: '**', redirectTo: '' },
     ]),
   ],

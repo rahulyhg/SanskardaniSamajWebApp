@@ -52,7 +52,9 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     console.log("login successful");
-                    this.router.navigate([this.returnUrl]);
+                    this.loading = false;
+                    console.log(this.returnUrl);
+                    this.router.navigate(['/welcome']);
                 },
                 error => {
                     this.error = error;
