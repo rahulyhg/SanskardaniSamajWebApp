@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
+import { IResponse } from '../members/response';
 
 
 
@@ -25,10 +26,11 @@ export class AuthenticationService {
 
     login(username: string, password: string) {
         
-        return this.http.post<any>(this.baseUrl + 'api/authenticate', { username, password })
-            .pipe(map(res => {
-                console.log(res);
-                var user = <User>(res.data);
+        return this.http.post<IResponse>(this.baseUrl + 'api/authenticate', { username, password })
+            .pipe(map(result => {
+                console.log(result);
+                var resp = <IResponse> result;
+                var user = <User>(resp.Data);
                 
                 console.log(user);
                 
