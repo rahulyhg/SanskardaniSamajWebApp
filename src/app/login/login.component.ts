@@ -51,9 +51,8 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    console.log("login successful");
+                    
                     this.loading = false;
-                    console.log(this.returnUrl);
                     this.router.navigate(['/welcome']);
                 },
                 error => {
