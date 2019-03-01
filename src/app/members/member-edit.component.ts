@@ -8,22 +8,25 @@ import { isBoolean } from 'util';
 import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
 import { FamilyInfo, IFamilyInfo } from './familyinfo';
 import { state } from '../models/state.enum';
+import { FormBuilder, FormGroup, Validators, FormControl,ReactiveFormsModule,FormsModule, Validator } from '@angular/forms';
 
 @Component({
   templateUrl: './member-edit.component.html',
   styleUrls: ['./member-edit.component.css']
 })
-export class MemberEditComponent implements OnInit {
-
+export class MemberEditComponent implements OnInit {  
   pageTitle = 'Edit Member';
   errorMessage = '';
   member: Member | undefined;
   familyMembers: IFamilyInfo[] = [];
   result: boolean = true;
+  memberForm: FormGroup;
+  submitted = false;
 
   constructor(public dialog: MatDialog, private route: ActivatedRoute,
     private router: Router,
-    private memberService: MembersService) {
+    private memberService: MembersService,
+    private formBuilder: FormBuilder) {
     router.events.subscribe(
       (event: NavigationEvent): void => {
         console.log(router.url);
@@ -33,6 +36,11 @@ export class MemberEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.member = new Member();
+    this.memberForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      fatherName:['', Validators.required]
+  });
+    
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
       const id = param;
@@ -42,6 +50,9 @@ export class MemberEditComponent implements OnInit {
       this.pageTitle = "Add Member"
     }
   }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.memberForm.controls; }
 
   getMember(id: string) {
     this.memberService.getMember(id).subscribe(
@@ -63,6 +74,13 @@ export class MemberEditComponent implements OnInit {
   }
 
   onSave() {
+
+    this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.memberForm.invalid) {
+            return;
+        }
     this.member.FamilyInfo = this.familyMembers;
 
     if (this.member._id == undefined || this.member._id == "") {
