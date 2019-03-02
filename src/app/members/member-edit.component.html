@@ -2,7 +2,7 @@
   <div class='card-header'>
     {{pageTitle + ': ' + member.Name}}
   </div>
-  <form #memberForm="ngForm" (ngSubmit)="memberForm.form.valid && onSubmit()" novalidate>
+  <form #memberForm="ngForm" (ngSubmit)="memberForm.form.valid && onSave()" novalidate>
     <div class='row'>
       <div class='col-md-11'>
         <div><b>
@@ -14,10 +14,12 @@
             <label for="text">Name:</label>
           </div>
           <div class='col-md-4'>
-            <input type='text' class="form-control" name="name" [(ngModel)]='member.Name' #name="ngModel" required
+            <input type='text' class="form-control" name="name" [(ngModel)]='member.Name' #name="ngModel" required 
+              pattern="^[\w\s-]+$" 
               minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': memberForm.submitted && name.invalid }" />
             <div *ngIf="memberForm.submitted && name.invalid" class="invalid-feedback">
               <div *ngIf="name.errors.required">Name is required</div>
+              <div *ngIf="name.errors.pattern">Name is not valid.</div>
             </div>
           </div>
           <div class='col-md-3'>
@@ -33,9 +35,11 @@
           </div>
           <div class='col-md-4'>
             <input type='text' class="form-control" name="fatherName" [(ngModel)]='member.FatherName' #fatherName="ngModel"
-              required minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': memberForm.submitted && fatherName.invalid }" />
+              required pattern="^[\w\s-]+$"
+              minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': memberForm.submitted && fatherName.invalid }" />
             <div *ngIf="memberForm.submitted && fatherName.invalid" class="invalid-feedback">
               <div *ngIf="fatherName.errors.required">Father Name is required</div>
+              <div *ngIf="fatherName.errors.pattern">Father Name is not valid.</div>
             </div>
           </div>
           <div class='col-md-3'>
