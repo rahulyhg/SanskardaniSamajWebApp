@@ -1,3 +1,7 @@
+h5{
+  padding: 4px;
+  margin: 4px;
+}
 input[type=text] {
     width: 100%;
     padding: 4px;
@@ -45,6 +49,13 @@ input[type=text] {
   input[type=checkbox] {
     padding: 4px;
     margin: 4px;
+    position: absolute !important;
+    margin-top:5%;        
+  }
+  select {
+    width: 100%;
+    padding: 4px;
+    margin: 4px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -55,6 +66,11 @@ input[type=text] {
     margin: 4px;
     align-content: center
 }
+label{
+  padding: 4px;
+  margin: 4px;
+  align-content: center
+}
 
 button.right {
   position: absolute;
@@ -62,3 +78,10 @@ button.right {
   margin-right: 10px;
   margin-top: -5px;  
 }
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+} 

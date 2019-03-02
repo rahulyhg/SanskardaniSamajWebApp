@@ -1,5 +1,3 @@
-import { state } from '../models/state.enum';
-
 export interface IFamilyInfo {
     _id: string,
     Name: string,

@@ -2,182 +2,185 @@
   <div class='card-header'>
     {{pageTitle + ': ' + member.Name}}
   </div>
-  <div class='form-group'>
+  <form #memberForm="ngForm" (ngSubmit)="memberForm.form.valid && onSave()" novalidate>
     <div class='row'>
-      <div class='col-md-8'>
+      <div class='col-md-11'>
         <div><b>
             <h5>Personal Information</h5>
-          </b></div>
-
+          </b>
+        </div>
         <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Name:</p>
+          <div class='col-md-2'>
+            <label for="text">Name:</label>
           </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.Name' />
+          <div class='col-md-4'>
+            <input type='text' class="form-control" name="name" [(ngModel)]='member.Name' #name="ngModel" required 
+              pattern="^[\w\s-]+$" 
+              minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': memberForm.submitted && name.invalid }" />
+            <div *ngIf="memberForm.submitted && name.invalid" class="invalid-feedback">
+              <div *ngIf="name.errors.required">Name is required</div>
+              <div *ngIf="name.errors.pattern">Name is not valid.</div>
+            </div>
+          </div>
+          <div class='col-md-3'>
+            <label type="text">Married:</label>
+          </div>
+          <div class='col-md-3'>
+            <input type='checkbox' [(ngModel)]='member.IsMarried' name="IsMarried" />
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Father's Name:</p>
+          <div class='col-md-2'>
+            <label for="text">Father's Name:</label>
           </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.FatherName' />
+          <div class='col-md-4'>
+            <input type='text' class="form-control" name="fatherName" [(ngModel)]='member.FatherName' #fatherName="ngModel"
+              required pattern="^[\w\s-]+$"
+              minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': memberForm.submitted && fatherName.invalid }" />
+            <div *ngIf="memberForm.submitted && fatherName.invalid" class="invalid-feedback">
+              <div *ngIf="fatherName.errors.required">Father Name is required</div>
+              <div *ngIf="fatherName.errors.pattern">Father Name is not valid.</div>
+            </div>
+          </div>
+          <div class='col-md-3'>
+            <label type="text">Marriage Date:</label>
+          </div>
+          <div class='col-md-3'>
+            <input type='date' [(ngModel)]='member.MarriageDate' name="MarriageDate" />
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">DOB:</p>
+          <div class='col-md-2'>
+            <label type="text">DOB:</label>
           </div>
-          <div class='col-md-8'>
-            <input type='date' [(ngModel)]='member.DOB' />
+          <div class='col-md-4'>
+            <input type='date' [(ngModel)]='member.DOB' name="DOB" />
+          </div>
+          <div class='col-md-3'>
+            <label type="text">Membership Number:</label>
+          </div>
+          <div class='col-md-3'>
+            <input type='text' [(ngModel)]='member.MembershipNumber' name="MembershipNumber" />
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Gender:</p>
+          <div class='col-md-2'>
+            <label type="text">Gender:</label>
           </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.Gender' />
+          <div class='col-md-4'>
+            <select class="form-control" name="gender" required [(ngModel)]='member.Gender' #gender="ngModel" required
+            (ngModelChange)='onGenderSelected($event)' [ngClass]="{ 'is-invalid': memberForm.submitted && gender.invalid }">
+                <option class='gender' *ngFor='let gender of genders' [value]="gender">{{gender}}</option>
+            </select>            
+            <div *ngIf="memberForm.submitted && gender.invalid" class="invalid-feedback">
+                <div *ngIf="gender.errors.required">Please select member gender.</div>
+              </div>
+          </div>
+          <div class='col-md-3'>
+            <label type="text">Membership Applied Date:</label>
+          </div>
+          <div class='col-md-3'>
+            <input type='date' [(ngModel)]='member.MembershipAppliedDate' name="MembershipAppliedDate" />
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Married:</p>
+          <div class='col-md-2'>
+            <label type="text">Contact Number:</label>
           </div>
-          <div class='col-md-8'>
-            <input type='checkbox' [(ngModel)]='member.IsMarried' />
+          <div class='col-md-4'>
+            <input type='text' class="form-control" name="contactNo" [(ngModel)]='member.ContactNo' #contactNo="ngModel"
+              required minlength="10" maxlength="10" [ngClass]="{ 'is-invalid': memberForm.submitted && contactNo.invalid }" />
+            <div *ngIf="memberForm.submitted && contactNo.invalid" class="invalid-feedback">
+              <div *ngIf="contactNo.errors.required">Contact Number is required</div>
+              <div *ngIf="contactNo.errors.minlength">Contact Number must be at 10 character long.</div>
+            </div>
+          </div>
+          <div class='col-md-3'>
+            <label type="text">Membership Date:</label>
+          </div>
+          <div class='col-md-3'>
+            <input type='date' [(ngModel)]='member.MembershipDate' name="MembershipDate" />
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Marriage Date:</p>
+          <div class='col-md-2'>
+            <label type="text">Email Id:</label>
           </div>
-          <div class='col-md-8'>
-            <input type='date' [(ngModel)]='member.MarriageDate' />
+          <div class='col-md-4'>
+            <input type='email' [(ngModel)]='member.EmailId' name="EmailId" />
+          </div>
+          <div class='col-md-3'>
+            <label type="text">Membership Amount:</label>
+          </div>
+          <div class='col-md-3'>
+            <input type='number' [(ngModel)]='member.MembershipAmount' name="MembershipAmount" />
           </div>
         </div>
         <div class='row'>
+          <div class='col-md-2'>
+            <label type="text">Occupation:</label>
+          </div>
           <div class='col-md-4'>
-            <p type="text">Contact Number:</p>
+            <input type='text' [(ngModel)]='member.Occupation' name="Occupation" />
           </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.ContactNo' />
+          <div class='col-md-3'>
+            <label type="text">Receipt Number:</label>
           </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Email Id:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='email' [(ngModel)]='member.EmailId' />
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Occupation:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.Occupation' />
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Membership Number:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.MembershipNumber' />
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Membership Applied Date:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='date' [(ngModel)]='member.MembershipAppliedDate' />
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Membership Date:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='date' [(ngModel)]='member.MembershipDate' />
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Membership Amount:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='number' [(ngModel)]='member.MembershipAmount' />
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Receipt Number:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='number' [(ngModel)]='member.ReceiptNumber' />
+          <div class='col-md-3'>
+            <input type='number' [(ngModel)]='member.ReceiptNumber' name="ReceiptNumber" />
           </div>
         </div>
         <div><b>
             <h5>Address</h5>
           </b></div>
         <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">House No.:</p>
+          <div class='col-md-2'>
+            <label type="text">House No.:</label>
           </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.Address.HouseNumber' />
+          <div class='col-md-4'>
+            <input type='text' [(ngModel)]='member.Address.HouseNumber' name="HouseNumber" />
+          </div>
+          <div class='col-md-3'>
+            <label type="text">State:</label>
+          </div>
+          <div class='col-md-3'>
+            <input type='text' [(ngModel)]='member.Address.State' name="State" />
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Address:</p>
+          <div class='col-md-2'>
+            <label type="text">Address:</label>
           </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.Address.Address' />
+          <div class='col-md-4'>
+            <input type='text' [(ngModel)]='member.Address.Address' name="Address" />
+          </div>
+          <div class='col-md-3'>
+            <label type="text">Country:</label>
+          </div>
+          <div class='col-md-3'>
+            <input type='text' [(ngModel)]='member.Address.Country' name="Country" />
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">PIN:</p>
+          <div class='col-md-2'>
+            <label type="text">PIN:</label>
           </div>
-          <div class='col-md-8'>
-            <input type='number' [(ngModel)]='member.Address.PIN' />
+          <div class='col-md-4'>
+            <input type='number' [(ngModel)]='member.Address.PIN' name="PIN" />
+          </div>
+          <div class='col-md-3'>
+            <label type="text">Landmark:</label>
+          </div>
+          <div class='col-md-3'>
+            <input type='text' [(ngModel)]='member.Address.Landmark' name="Landmark" />
           </div>
         </div>
         <div class='row'>
+          <div class='col-md-2'>
+            <label type="text">District:</label>
+          </div>
           <div class='col-md-4'>
-            <p type="text">District:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.Address.District' />
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">State:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.Address.State' />
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Country:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.Address.Country' />
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-4'>
-            <p type="text">Landmark:</p>
-          </div>
-          <div class='col-md-8'>
-            <input type='text' [(ngModel)]='member.Address.Landmark' />
+            <input type='text' [(ngModel)]='member.Address.District' name="District" />
           </div>
         </div>
       </div>
@@ -227,7 +230,8 @@
       <button class='btn btn-outline-secondary' (click)='onBack()' style='width:80px'>
         <i class='fa fa-chevron-left'></i> Back
       </button>
-      <button class='btn btn-outline-secondary' (click)='onSave()' style='width:80px;margin: 0px 4px'>Save
+      <button type="submit" class='btn btn-outline-secondary' (click)='onSave()' style='width:80px;margin: 0px 4px'>Save
       </button>
     </div>
-  </div>
+  </form>
+</div>
