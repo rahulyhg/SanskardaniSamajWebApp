@@ -7,7 +7,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { isBoolean } from 'util';
 import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
 import { FamilyInfo, IFamilyInfo } from './familyinfo';
-import { state } from '../models/state.enum';
 import { FormBuilder, FormGroup, Validators, FormControl,ReactiveFormsModule,FormsModule, Validator } from '@angular/forms';
 
 @Component({
@@ -22,6 +21,7 @@ export class MemberEditComponent implements OnInit {
   result: boolean = true;
   memberForm: FormGroup;
   submitted = false;
+  genders = ['Male', 'Female'];
 
   constructor(public dialog: MatDialog, private route: ActivatedRoute,
     private router: Router,
@@ -171,4 +171,9 @@ export class MemberEditComponent implements OnInit {
       }
     }
   }
+
+  onGenderSelected(event){
+    console.log(event); //option value will be sent as event
+    console.log(this.member.Gender);
+   }
 }

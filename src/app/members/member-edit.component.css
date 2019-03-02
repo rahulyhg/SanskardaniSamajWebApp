@@ -52,6 +52,15 @@ input[type=text] {
     position: absolute !important;
     margin-top:5%;        
   }
+  select {
+    width: 100%;
+    padding: 4px;
+    margin: 4px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
   #text {
     padding: 4px;
     margin: 4px;

@@ -15,7 +15,7 @@
           </div>
           <div class='col-md-4'>
             <input type='text' class="form-control" name="name" [(ngModel)]='member.Name' #name="ngModel" required
-              [ngClass]="{ 'is-invalid': memberForm.submitted && name.invalid }" />
+              minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': memberForm.submitted && name.invalid }" />
             <div *ngIf="memberForm.submitted && name.invalid" class="invalid-feedback">
               <div *ngIf="name.errors.required">Name is required</div>
             </div>
@@ -33,7 +33,7 @@
           </div>
           <div class='col-md-4'>
             <input type='text' class="form-control" name="fatherName" [(ngModel)]='member.FatherName' #fatherName="ngModel"
-              required [ngClass]="{ 'is-invalid': memberForm.submitted && fatherName.invalid }" />
+              required minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': memberForm.submitted && fatherName.invalid }" />
             <div *ngIf="memberForm.submitted && fatherName.invalid" class="invalid-feedback">
               <div *ngIf="fatherName.errors.required">Father Name is required</div>
             </div>
@@ -64,7 +64,13 @@
             <label type="text">Gender:</label>
           </div>
           <div class='col-md-4'>
-            <input type='text' [(ngModel)]='member.Gender' name="Gender" />
+            <select class="form-control" name="gender" required [(ngModel)]='member.Gender' #gender="ngModel" required
+            (ngModelChange)='onGenderSelected($event)' [ngClass]="{ 'is-invalid': memberForm.submitted && gender.invalid }">
+                <option class='gender' *ngFor='let gender of genders' [value]="gender">{{gender}}</option>
+            </select>            
+            <div *ngIf="memberForm.submitted && gender.invalid" class="invalid-feedback">
+                <div *ngIf="gender.errors.required">Please select member gender.</div>
+              </div>
           </div>
           <div class='col-md-3'>
             <label type="text">Membership Applied Date:</label>
@@ -78,7 +84,12 @@
             <label type="text">Contact Number:</label>
           </div>
           <div class='col-md-4'>
-            <input type='text' [(ngModel)]='member.ContactNo' name="ContactNo" />
+            <input type='text' class="form-control" name="contactNo" [(ngModel)]='member.ContactNo' #contactNo="ngModel"
+              required minlength="10" maxlength="10" [ngClass]="{ 'is-invalid': memberForm.submitted && contactNo.invalid }" />
+            <div *ngIf="memberForm.submitted && contactNo.invalid" class="invalid-feedback">
+              <div *ngIf="contactNo.errors.required">Contact Number is required</div>
+              <div *ngIf="contactNo.errors.minlength">Contact Number must be at 10 character long.</div>
+            </div>
           </div>
           <div class='col-md-3'>
             <label type="text">Membership Date:</label>
