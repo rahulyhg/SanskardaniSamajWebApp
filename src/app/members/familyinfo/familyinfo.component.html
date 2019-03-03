@@ -1,6 +1,6 @@
 <div class='card'>
   <div class='card-header'>
-    {{pageTitle + ': ' + member.Name}}
+    {{pageTitle + ': ' + familyInfo.Name}}
   </div>
   <form #familyForm="ngForm" (ngSubmit)="familyForm.form.valid && add()" novalidate>
     <div class='row'>
