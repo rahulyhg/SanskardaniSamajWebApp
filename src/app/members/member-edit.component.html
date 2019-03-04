@@ -2,7 +2,7 @@
   <div class='card-header'>
     {{pageTitle + ': ' + member.Name}}
   </div>
-  <form #memberForm="ngForm" novalidate>
+  <form #memberForm="ngForm" (ngSubmit)="memberForm.form.valid && onSave()" novalidate>
     <div class='row'>
       <div class='col-md-11'>
         <div><b>
@@ -188,7 +188,7 @@
     <div class='card'>
       <div class='card-header'>
         Family Info
-        <button mat-raised-button (click)="addFamilyInfo()" class="right">Add Members</button>
+        <button mat-raised-button type="button" (click)="addFamilyInfo()" class="right">Add Members</button>
       </div>
       <div class='card-body'>
         <div class='table-responsive'>
@@ -230,7 +230,7 @@
       <button class='btn btn-outline-secondary' (click)='onBack()' style='width:80px'>
         <i class='fa fa-chevron-left'></i> Back
       </button>
-      <button type="submit" class='btn btn-outline-secondary' (click)='onSave()' style='width:80px;margin: 0px 4px'>Save
+      <button type="submit" class='btn btn-outline-secondary' style='width:80px;margin: 0px 4px'>Save
       </button>
     </div>
   </form>
