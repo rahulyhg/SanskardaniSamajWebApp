@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FamilyInfo, IFamilyInfo } from '../familyinfo';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-familyinfo',
@@ -33,7 +34,7 @@ export class FamilyinfoComponent implements OnInit {
     }
 
     this.familyForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      // name: ['', Validators.required],
     });
   }
 
@@ -46,6 +47,8 @@ export class FamilyinfoComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.familyForm.invalid) {
+      console.log(this.familyForm.errors);
+      console.log(this.familyForm);
       return;
     }
     this.dialogRef.close(this.familyInfo);

@@ -37,8 +37,8 @@ export class MemberEditComponent implements OnInit {
   ngOnInit(): void {
     this.member = new Member();
     this.memberForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      fatherName:['', Validators.required]
+      // name: ['', Validators.required],
+      // fatherName:['', Validators.required]
   });
     
     const param = this.route.snapshot.paramMap.get('id');
@@ -79,6 +79,7 @@ export class MemberEditComponent implements OnInit {
 
         // stop here if form is invalid
         if (this.memberForm.invalid) {
+          console.log(this.memberForm);
             return;
         }
     this.member.FamilyInfo = this.familyMembers;

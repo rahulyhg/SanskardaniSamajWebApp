@@ -28,7 +28,7 @@
             <Label type="text">DOB:</Label>
           </div>
           <div class='col-md-7'>
-            <input type='date' [(ngModel)]='familyInfo.DOB' />
+            <input type='date' [(ngModel)]='familyInfo.DOB' name="DOB"/>
           </div>
         </div>
         <div class='row'>
@@ -50,7 +50,7 @@
             <Label type="text">Married:</Label>
           </div>
           <div class='col-md-7'>
-            <input type='checkbox' [(ngModel)]='familyInfo.IsMarried' />
+            <input type='checkbox' [(ngModel)]='familyInfo.IsMarried' name="isMarried"/>
           </div>
         </div>
         <div class='row'>
@@ -58,7 +58,7 @@
             <Label type="text">Dependent:</Label>
           </div>
           <div class='col-md-7'>
-            <input type='checkbox' [(ngModel)]='familyInfo.IsDependent' />
+            <input type='checkbox' [(ngModel)]='familyInfo.IsDependent' name="isDependent"/>
           </div>
         </div>
         <div class='row'>
@@ -66,7 +66,7 @@
             <Label type="text">Occupation:</Label>
           </div>
           <div class='col-md-7'>
-            <input type='text' [(ngModel)]='familyInfo.Occupation' />
+            <input type='text' [(ngModel)]='familyInfo.Occupation' name="occupation"/>
           </div>
         </div>
         <div class='row'>
@@ -74,7 +74,7 @@
             <Label type="text">Membership Number:</Label>
           </div>
           <div class='col-md-7'>
-            <input type='text' [(ngModel)]='familyInfo.MembershipNumber' />
+            <input type='text' [(ngModel)]='familyInfo.MembershipNumber' name="membershipNumber"/>
           </div>
         </div>
         <div class='row'>
@@ -82,7 +82,7 @@
             <Label type="text">Relationship:</Label>
           </div>
           <div class='col-md-7'>
-            <input type='text' [(ngModel)]='familyInfo.Relationship' />
+            <input type='text' [(ngModel)]='familyInfo.Relationship' name="relationship"/>
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@
     <div class='card-footer'>
       <button class='btn btn-outline-secondary' (click)='close()' style='width:80px'> Cancel
       </button>
-      <button class='btn btn-outline-secondary' (click)='add()' style='width:80px;margin: 0px 4px'> Save
+      <button class='btn btn-outline-secondary' style='width:80px;margin: 0px 4px'> Save
       </button>
     </div>
   </form>
