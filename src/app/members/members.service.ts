@@ -16,29 +16,51 @@ export class MembersService {
   constructor(private http: HttpClient) { }
 
   getMembers(): Observable<IResponse> {
-    return this.http.get<IResponse>(this.membersUrl).pipe(
-      tap(data => { }
-        //console.log('All: ' + JSON.stringify(data))
-      ),
-      catchError(this.handleError)
-    );
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentUser.token}`,
+        })
+      };
+      return this.http.get<IResponse>(this.membersUrl,httpOptions).pipe(
+        tap(data => { }
+          //console.log('All: ' + JSON.stringify(data))
+        ),
+        catchError(this.handleError)
+      );
+    }
   }
 
   getMember(id: string): Observable<IResponse | undefined> {
-    return this.http.get<IResponse>(this.membersUrl + '/' + id).pipe(
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentUser.token}`,
+        })
+      };
+    return this.http.get<IResponse>(this.membersUrl + '/' + id, httpOptions).pipe(
       tap(data => { }
         //console.log('All: ' + JSON.stringify(data))
       ),
       catchError(this.handleError)
     );
+      }
   }
 
   postMember(member: IMember): boolean {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentUser.token}`,
+        })
+      };
+    
     // console.log(member);
     this.http.post(this.membersUrl, member, httpOptions)
       .subscribe(r => {
@@ -63,14 +85,18 @@ export class MembersService {
           return false;
         });
     return false;
+      }
   }
 
   putMember(member: IMember): boolean {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    };
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentUser.token}`,
+        })
+      };
     console.log(member);
     this.http.put(this.membersUrl + "/" + member._id, member, httpOptions)
       .subscribe(data => {
@@ -95,10 +121,19 @@ export class MembersService {
           return false;
         });
     return false;
+      }
   }
 
   deleteMember(id: string): boolean {
-    this.http.delete(this.membersUrl + '/' + id)
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentUser.token}`,
+        })
+      };
+    this.http.delete(this.membersUrl + '/' + id,httpOptions)
       .subscribe(data => {
         var resp = <IResponse>data;
         if (resp.StatusCode == 100) {
@@ -119,6 +154,7 @@ export class MembersService {
           console.log(err2);
           return false;
         });
+      }
     return false;
   }
 
