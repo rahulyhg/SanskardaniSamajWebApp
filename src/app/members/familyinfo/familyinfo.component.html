@@ -2,7 +2,7 @@
   <div class='card-header'>
     {{pageTitle + ': ' + familyInfo.Name}}
   </div>
-  <form #familyForm="ngForm" (ngSubmit)="familyForm.form.valid && add()" novalidate>
+  <form #familyForm="ngForm" novalidate>
     <div class='row'>
       <div class='col-md-12'>
         <div><b>
@@ -90,7 +90,7 @@
     <div class='card-footer'>
       <button class='btn btn-outline-secondary' (click)='close()' style='width:80px'> Cancel
       </button>
-      <button class='btn btn-outline-secondary' style='width:80px;margin: 0px 4px'> Save
+      <button class='btn btn-outline-secondary' (click)='add()' style='width:80px;margin: 0px 4px'> Save
       </button>
     </div>
   </form>
