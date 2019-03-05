@@ -24,7 +24,7 @@ export class MembersService {
           'Authorization': `Bearer ${currentUser.token}`,
         })
       };
-      return this.http.get<IResponse>(this.membersUrl,httpOptions).pipe(
+      return this.http.get<IResponse>(this.membersUrl, httpOptions).pipe(
         tap(data => { }
           //console.log('All: ' + JSON.stringify(data))
         ),
@@ -42,16 +42,16 @@ export class MembersService {
           'Authorization': `Bearer ${currentUser.token}`,
         })
       };
-    return this.http.get<IResponse>(this.membersUrl + '/' + id, httpOptions).pipe(
-      tap(data => { }
-        //console.log('All: ' + JSON.stringify(data))
-      ),
-      catchError(this.handleError)
-    );
-      }
+      return this.http.get<IResponse>(this.membersUrl + '/' + id, httpOptions).pipe(
+        tap(data => { }
+          //console.log('All: ' + JSON.stringify(data))
+        ),
+        catchError(this.handleError)
+      );
+    }
   }
 
-  postMember(member: IMember): boolean {
+  postMember(member: IMember): Observable<IResponse> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const httpOptions = {
@@ -60,32 +60,13 @@ export class MembersService {
           'Authorization': `Bearer ${currentUser.token}`,
         })
       };
-    
-    // console.log(member);
-    this.http.post(this.membersUrl, member, httpOptions)
-      .subscribe(r => {
-        // console.log('All: ' + JSON.stringify(data));
-        var resp = <IResponse>r;
-        if (resp.StatusCode == 100) {
-          alert("date saved successfully.");
-        }
-        else{
-          alert(JSON.stringify(resp));
-          console.log(resp);
-        }
-      },
-        err2 => {
-          if (err2.error) {
-            alert(JSON.stringify(err2.error));
-          }
-          else {
-            alert(JSON.stringify(err2));
-          }
-          console.log(err2);
-          return false;
-        });
-    return false;
-      }
+
+      // console.log(member);
+    return this.http.post(this.membersUrl, member, httpOptions)
+           .pipe(map((data: IResponse) => {            
+            return data;
+          }), catchError(this.handleError));        
+    }
   }
 
   putMember(member: IMember): boolean {
@@ -97,31 +78,31 @@ export class MembersService {
           'Authorization': `Bearer ${currentUser.token}`,
         })
       };
-    console.log(member);
-    this.http.put(this.membersUrl + "/" + member._id, member, httpOptions)
-      .subscribe(data => {
-        // console.log('All: ' + JSON.stringify(data));
-        var resp = <IResponse>data;
-        if (resp.StatusCode == 100) {
-          alert("date saved successfully.");
-        }
-        else {
-          alert(JSON.stringify(resp));
-          console.log(resp);
-        }
-      },
-        err2 => {
-          if (err2.error) {
-            alert(JSON.stringify(err2.error));
+      console.log(member);
+      this.http.put(this.membersUrl + "/" + member._id, member, httpOptions)
+        .subscribe(data => {
+          // console.log('All: ' + JSON.stringify(data));
+          var resp = <IResponse>data;
+          if (resp.StatusCode == 100) {
+            alert("date saved successfully.");
           }
           else {
-            alert(JSON.stringify(err2));
+            alert(JSON.stringify(resp));
+            console.log(resp);
           }
-          console.log(err2);
-          return false;
-        });
-    return false;
-      }
+        },
+          err2 => {
+            if (err2.error) {
+              alert(JSON.stringify(err2.error));
+            }
+            else {
+              alert(JSON.stringify(err2));
+            }
+            console.log(err2);
+            return false;
+          });
+      return false;
+    }
   }
 
   deleteMember(id: string): boolean {
@@ -133,28 +114,28 @@ export class MembersService {
           'Authorization': `Bearer ${currentUser.token}`,
         })
       };
-    this.http.delete(this.membersUrl + '/' + id,httpOptions)
-      .subscribe(data => {
-        var resp = <IResponse>data;
-        if (resp.StatusCode == 100) {
-          alert("Member deleted successfully.");
-        }
-        else {
-          alert(JSON.stringify(resp));
-          console.log(resp);
-        }
-      },
-        err2 => {
-          if (err2.error) {
-            alert(JSON.stringify(err2.error));
+      this.http.delete(this.membersUrl + '/' + id, httpOptions)
+        .subscribe(data => {
+          var resp = <IResponse>data;
+          if (resp.StatusCode == 100) {
+            alert("Member deleted successfully.");
           }
           else {
-            alert(JSON.stringify(err2));
+            alert(JSON.stringify(resp));
+            console.log(resp);
           }
-          console.log(err2);
-          return false;
-        });
-      }
+        },
+          err2 => {
+            if (err2.error) {
+              alert(JSON.stringify(err2.error));
+            }
+            else {
+              alert(JSON.stringify(err2));
+            }
+            console.log(err2);
+            return false;
+          });
+    }
     return false;
   }
 

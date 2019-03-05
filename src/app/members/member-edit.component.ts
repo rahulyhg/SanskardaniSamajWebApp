@@ -7,13 +7,13 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { isBoolean } from 'util';
 import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
 import { FamilyInfo, IFamilyInfo } from './familyinfo';
-import { FormBuilder, FormGroup, Validators, FormControl,ReactiveFormsModule,FormsModule, Validator } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule, Validator } from '@angular/forms';
 
 @Component({
   templateUrl: './member-edit.component.html',
   styleUrls: ['./member-edit.component.css']
 })
-export class MemberEditComponent implements OnInit {  
+export class MemberEditComponent implements OnInit {
   pageTitle = 'Edit Member';
   errorMessage = '';
   member: Member | undefined;
@@ -39,8 +39,8 @@ export class MemberEditComponent implements OnInit {
     this.memberForm = this.formBuilder.group({
       // name: ['', Validators.required],
       // fatherName:['', Validators.required]
-  });
-    
+    });
+
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
       const id = param;
@@ -76,26 +76,37 @@ export class MemberEditComponent implements OnInit {
   onSave() {
 
     this.submitted = true;
+    // stop here if form is invalid
+    if (this.memberForm.invalid) {
+      return;
+    }
 
-        // stop here if form is invalid
-        if (this.memberForm.invalid) {
-          console.log(this.memberForm);
-            return;
-        }
     this.member.FamilyInfo = this.familyMembers;
 
     if (this.member._id == undefined || this.member._id == "") {
-      this.result = this.memberService.postMember(this.member);
+      this.memberService.postMember(this.member).subscribe(
+        response => {
+          if (response.StatusCode == 100) {
+            alert("date saved successfully.");
+            this.router.navigate(['/members']);
+          }
+          else {
+            alert(JSON.stringify(response));
+          }
+        },
+        err2 => {
+          if (err2.error) {
+            alert(JSON.stringify(err2.error));
+          }
+          else {
+            alert(JSON.stringify(err2));
+          }
+          console.log(err2);
+          return false;
+        });
     }
     else {
-      console.log(this.member.FamilyInfo);
       this.result = this.memberService.putMember(this.member);
-    }
-    if (this.result) {
-      //alert("Save Successfully!");
-    }
-    else {
-      //alert("Save failed!");
     }
   }
 
@@ -138,14 +149,12 @@ export class MemberEditComponent implements OnInit {
               });
 
               result._id = (parseInt(items[0]._id) + 1) + "";
-
             }
-
           }
           this.familyMembers.push(result);
         }
         else {
-            if (result._id.length > 2) {
+          if (result._id.length > 2) {
             result.IsEdited = true;
           }
         }
@@ -173,8 +182,8 @@ export class MemberEditComponent implements OnInit {
     }
   }
 
-  onGenderSelected(event){
+  onGenderSelected(event) {
     console.log(event); //option value will be sent as event
     console.log(this.member.Gender);
-   }
+  }
 }
