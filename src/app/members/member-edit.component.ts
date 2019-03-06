@@ -93,6 +93,9 @@ export class MemberEditComponent implements OnInit {
             alert("date saved successfully.");
             this.router.navigate(['/members']);
           }
+          else if(response.StatusCode == 421){
+            alert(response.Message);
+          }
           else {
             alert(JSON.stringify(response));
           }

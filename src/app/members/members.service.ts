@@ -152,7 +152,7 @@ export class MembersService {
       // The response body may contain clues as to what went wrong,
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.log(errorMessage);
+    console.log(errorMessage); 
     return throwError(errorMessage);
   }
 }
