@@ -55,12 +55,14 @@
           </div>
           <div class='col-md-4'>
             <input type='date' [(ngModel)]='member.DOB' name="DOB" />
+            <!-- <input class="form-control" placeholder="Datepicker" [(ngModel)]='member.DOB' bsDatepicker [minDate]="minDate" [maxDate]="maxDate"> -->
           </div>
           <div class='col-md-3'>
             <label type="text">Membership Number:</label>
           </div>
           <div class='col-md-3'>
-            <input type='text' [(ngModel)]='member.MembershipNumber' name="MembershipNumber" />
+            <input type='text' [(ngModel)]='member.MembershipNumber' name="MembershipNumber" min="0" [readonly]="editMode"
+            onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onpaste="return false"/>
           </div>
         </div>
         <div class='row'>
@@ -113,7 +115,8 @@
             <label type="text">Membership Amount:</label>
           </div>
           <div class='col-md-3'>
-            <input type='number' [(ngModel)]='member.MembershipAmount' name="MembershipAmount" />
+            <input type='number' [(ngModel)]='member.MembershipAmount' name="MembershipAmount" min="0" 
+            onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onpaste="return false"/>
           </div>
         </div>
         <div class='row'>
@@ -127,7 +130,8 @@
             <label type="text">Receipt Number:</label>
           </div>
           <div class='col-md-3'>
-            <input type='number' [(ngModel)]='member.ReceiptNumber' name="ReceiptNumber" />
+            <input type='number' [(ngModel)]='member.ReceiptNumber' name="ReceiptNumber" min="0"
+            onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onpaste="return false"/>
           </div>
         </div>
         <div><b>

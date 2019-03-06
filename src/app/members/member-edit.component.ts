@@ -19,6 +19,7 @@ export class MemberEditComponent implements OnInit {
   member: Member | undefined;
   familyMembers: IFamilyInfo[] = [];
   result: boolean = true;
+  editMode:boolean =false;
   memberForm: FormGroup;
   submitted = false;
   genders = ['Male', 'Female'];
@@ -45,9 +46,11 @@ export class MemberEditComponent implements OnInit {
     if (param) {
       const id = param;
       this.getMember(id);
+      this.editMode =true;
     }
     else {
-      this.pageTitle = "Add Member"
+      this.pageTitle = "Add Member";
+      this.editMode =false;
     }
   }
 
