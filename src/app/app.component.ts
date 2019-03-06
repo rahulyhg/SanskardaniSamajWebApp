@@ -10,7 +10,7 @@ import { User } from './models/user';
 })
 
 export class AppComponent {
-  pageTitle = 'Sanskardani Samaj';
+  pageTitle = 'Chhatrapati Shivaji Maratha Samaj Sangh Jabalpur';
   currentUser: User;
 
   constructor(
