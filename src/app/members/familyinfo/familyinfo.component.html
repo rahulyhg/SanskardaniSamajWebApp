@@ -63,6 +63,14 @@
         </div>
         <div class='row'>
           <div class='col-md-4'>
+            <Label type="text">Is Member:</Label>
+          </div>
+          <div class='col-md-7'>
+            <input type='checkbox' [(ngModel)]='familyInfo.IsMember' name="isMember"/>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-md-4'>
             <Label type="text">Occupation:</Label>
           </div>
           <div class='col-md-7'>
@@ -74,7 +82,8 @@
             <Label type="text">Membership Number:</Label>
           </div>
           <div class='col-md-7'>
-            <input type='text' [(ngModel)]='familyInfo.MembershipNumber' name="membershipNumber"/>
+            <input type='text' [(ngModel)]='familyInfo.MembershipNumber' [disabled]='!familyInfo.IsMember' name="membershipNumber"
+            onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onpaste="return false"/>
           </div>
         </div>
         <div class='row'>

@@ -46,7 +46,7 @@
             <label type="text">Marriage Date:</label>
           </div>
           <div class='col-md-3'>
-            <input type='date' [(ngModel)]='member.MarriageDate' name="MarriageDate" />
+            <input type='date' [(ngModel)]='member.MarriageDate' name="MarriageDate" [disabled]='!member.IsMarried' />
           </div>
         </div>
         <div class='row'>
@@ -203,7 +203,7 @@
                 <th>Relationship</th>
                 <th>DOB</th>
                 <th>Occupation</th>
-                <th>Is Member</th>
+                <th>Is Married</th>
                 <th>Membership Number</th>
                 <th></th>
               </tr>
@@ -215,7 +215,7 @@
                   <td>{{ familyinfo.Relationship }}</td>
                   <td>{{ familyinfo.DOB }}</td>
                   <td>{{ familyinfo.Occupation }}</td>
-                  <td><input type='checkbox' [(ngModel)]="familyinfo.IsMarried" disabled /></td>
+                  <td><input type='checkbox' style="margin-top:10px;" disabled [checked]='familyinfo.IsMarried' /></td>
                   <td>{{ familyinfo.MembershipNumber }}</td>
                   <td>
                     <a [routerLink]="" (click)="editFamilyInfo(familyinfo)">
