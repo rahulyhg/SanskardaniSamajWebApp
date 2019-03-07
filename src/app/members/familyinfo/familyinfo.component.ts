@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FamilyInfo, IFamilyInfo } from '../familyinfo';
+import { FamilyInfo, IFamilyInfo } from '../../models/familyinfo';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 

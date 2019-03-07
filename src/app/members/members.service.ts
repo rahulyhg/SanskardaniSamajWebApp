@@ -3,8 +3,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
-import { IMember } from './member';
-import { IResponse } from './response';
+import { IMember } from '../models/member';
+import { IResponse } from '../models/response';
 
 @Injectable({
   providedIn: 'root'

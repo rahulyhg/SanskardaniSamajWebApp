@@ -61,8 +61,12 @@
             <label type="text">Membership Number:</label>
           </div>
           <div class='col-md-3'>
-            <input type='text' [(ngModel)]='member.MembershipNumber' name="MembershipNumber" min="0" [readonly]="editMode"
+            <input type='text' class="form-control" [(ngModel)]='member.MembershipNumber' name="membershipNumber" min="0" [readonly]="editMode" #membershipNumber="ngModel"
+            [ngClass]="{ 'is-invalid': memberForm.submitted && membershipNumber.invalid }" required
             onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onpaste="return false"/>
+            <div *ngIf="memberForm.submitted && membershipNumber.invalid" class="invalid-feedback">
+              <div *ngIf="membershipNumber.errors.required">Membership Number is required</div>
+            </div>
           </div>
         </div>
         <div class='row'>

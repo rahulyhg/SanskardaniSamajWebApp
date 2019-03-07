@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Member, IMember } from './member';
+import { Member, IMember } from '../models/member';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from './members.service';
 import { Event as NavigationEvent } from "@angular/router";
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { isBoolean } from 'util';
 import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
-import { FamilyInfo, IFamilyInfo } from './familyinfo';
+import { FamilyInfo, IFamilyInfo } from '../models/familyinfo';
+import { MemberAddress, IMemberAddress } from '../models/memberaddress';
 import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule, Validator } from '@angular/forms';
 
 @Component({

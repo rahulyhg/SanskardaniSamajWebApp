@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
-import { IResponse } from '../members/response';
+import { IResponse } from '../models/response';
 
 
 
