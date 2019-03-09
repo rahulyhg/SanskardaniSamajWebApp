@@ -10,10 +10,14 @@ export interface IFamilyInfo {
     Occupation: string,
     IsMarried: boolean,
     IsEdited: boolean,
-    IsDeleted:boolean
+    IsDeleted:boolean,
+    IsOtherRelationship:boolean,
+    OtherRelationship:string
 }
 
 export class FamilyInfo implements IFamilyInfo {
+    IsOtherRelationship: boolean;
+    OtherRelationship: string;
     IsDeleted: boolean;
     IsEdited: boolean;
     _id: string;
@@ -30,5 +34,6 @@ export class FamilyInfo implements IFamilyInfo {
     constructor() {
         this.IsDeleted = false;
         this.IsEdited = false;
+        this.IsOtherRelationship = false;
      }
 } 

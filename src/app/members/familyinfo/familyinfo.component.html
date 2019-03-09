@@ -2,7 +2,7 @@
   <div class='card-header'>
     {{pageTitle + ': ' + familyInfo.Name}}
   </div>
-  <form #familyForm="ngForm" (ngSubmit)="familyForm.form.valid && add()" novalidate>
+  <form #familyForm="ngForm" (ngSubmit)="familyForm.form.valid && add()" novalidate style="margin:8px;">
     <div class='row'>
       <div class='col-md-12'>
         <div><b>
@@ -10,7 +10,7 @@
           </b>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
+          <div class='col-md-5'>
             <Label type="text">Name:</Label>
           </div>
           <div class='col-md-7'>
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
+          <div class='col-md-5'>
             <Label type="text">DOB:</Label>
           </div>
           <div class='col-md-7'>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
+          <div class='col-md-5'>
             <Label type="text">Gender:</Label>
           </div>
           <div class='col-md-7'>
@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
+          <div class='col-md-5'>
             <Label type="text">Married:</Label>
           </div>
           <div class='col-md-7'>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
+          <div class='col-md-5'>
             <Label type="text">Dependent:</Label>
           </div>
           <div class='col-md-7'>
@@ -62,7 +62,7 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
+          <div class='col-md-5'>
             <Label type="text">Is Member:</Label>
           </div>
           <div class='col-md-7'>
@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
+          <div class='col-md-5'>
             <Label type="text">Occupation:</Label>
           </div>
           <div class='col-md-7'>
@@ -78,7 +78,7 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
+          <div class='col-md-5'>
             <Label type="text">Membership Number:</Label>
           </div>
           <div class='col-md-7'>
@@ -87,11 +87,18 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-4'>
+          <div class='col-md-5'>
             <Label type="text">Relationship:</Label>
           </div>
           <div class='col-md-7'>
-            <input type='text' [(ngModel)]='familyInfo.Relationship' name="relationship"/>
+            <select class="form-control" name="relationship" required [(ngModel)]='familyInfo.Relationship' #relationship="ngModel" required
+            (ngModelChange)='onRelationSelected($event)' [ngClass]="{ 'is-invalid': familyForm.submitted && relationship.invalid }">
+                <option class='relationship' *ngFor='let relationship of relationships' [value]="relationship">{{relationship}}</option>
+            </select>            
+            <div *ngIf="familyForm.submitted && relationship.invalid" class="invalid-feedback">
+                <div *ngIf="relationship.errors.required">Please select relation with member.</div>
+              </div>
+              <input type='text' class="form-control" name="others" [(ngModel)]='familyInfo.OtherRelationship' *ngIf="familyInfo.IsOtherRelationship == true" />           
           </div>
         </div>
       </div>

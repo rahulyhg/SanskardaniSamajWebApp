@@ -15,6 +15,7 @@ export class FamilyinfoComponent implements OnInit {
   familyForm: FormGroup;
   submitted = false;
   genders = ['Male', 'Female'];
+  relationships = ['Father', 'Mother', 'Brother', 'Sister', 'Wife', 'Husband', 'Others'];
 
   constructor(
     public dialogRef: MatDialogRef<FamilyinfoComponent>,
@@ -27,7 +28,16 @@ export class FamilyinfoComponent implements OnInit {
     this.pageTitle = "Family Info";
     if (this.data != null) {
       this.familyInfo = this.data as FamilyInfo;
+      var saveRelationShip =this.familyInfo.Relationship;
+      var relationship = this.relationships.filter(function (data) {
+        return data == saveRelationShip
+    });
+    if (relationship.length == 0) {
+      this.familyInfo.OtherRelationship = this.familyInfo.Relationship;
+      this.familyInfo.IsOtherRelationship =true;
+      this.familyInfo.Relationship = "Others";
     }
+  }
     else {
       this.familyInfo = new FamilyInfo();
       this.familyInfo.IsMarried = false;
@@ -51,6 +61,12 @@ export class FamilyinfoComponent implements OnInit {
       console.log(this.familyForm);
       return;
     }
+
+    if (this.familyInfo.IsOtherRelationship == true) {
+      console.log(this.familyInfo.IsOtherRelationship);
+      this.familyInfo.Relationship = this.familyInfo.OtherRelationship;
+    }
+
     this.dialogRef.close(this.familyInfo);
   }
 
@@ -58,8 +74,18 @@ export class FamilyinfoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onGenderSelected(event){
+  onGenderSelected(event) {
     console.log(event); //option value will be sent as event
     console.log(this.familyInfo.Gender);
-   }
+  }
+
+  onRelationSelected(event) {
+    console.log(event); //option value will be sent as event
+    if (event == "Others") {
+      this.familyInfo.IsOtherRelationship = true;
+    }
+    else {
+      this.familyInfo.IsOtherRelationship = false;
+    }
+  }
 }
