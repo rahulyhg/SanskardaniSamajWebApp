@@ -26,6 +26,7 @@ import { MemberEditComponent } from './members/member-edit.component';
 import { FamilyinfoComponent } from './members/familyinfo/familyinfo.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guard/auth.guard';
+import { AdvanceSearchComponent } from './shared/advance-search/advance-search.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AuthGuard } from './guard/auth.guard';
     WelcomeComponent,
     MemberEditComponent,
     FamilyinfoComponent,
-    LoginComponent
+    LoginComponent,
+    AdvanceSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +76,6 @@ import { AuthGuard } from './guard/auth.guard';
   providers: [
   ],
   bootstrap: [AppComponent],
-  entryComponents: [FamilyinfoComponent]
+  entryComponents: [FamilyinfoComponent,AdvanceSearchComponent]
 })
 export class AppModule { }

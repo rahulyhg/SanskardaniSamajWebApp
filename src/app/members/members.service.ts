@@ -5,6 +5,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 
 import { IMember } from '../models/member';
 import { IResponse } from '../models/response';
+import { SearchCriteria } from '../models/SearchCriteria';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { IResponse } from '../models/response';
 
 export class MembersService {
   private membersUrl = 'https://ssmnodejsservice.herokuapp.com/api/members';
+  private advancedSearchUrl = 'https://ssmnodejsservice.herokuapp.com/api/advancesearch';
 
   constructor(private http: HttpClient) { }
 
@@ -137,6 +139,24 @@ export class MembersService {
           });
     }
     return false;
+  }
+
+  advancedSearch(searchCriteria: SearchCriteria):Observable<IResponse>
+  {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${currentUser.token}`,
+        })
+      };
+
+     return this.http.post(this.advancedSearchUrl, searchCriteria, httpOptions)
+      .pipe(map((data: IResponse) => {            
+        return data;
+      }), catchError(this.handleError));   
+    }
   }
 
   private handleError(err: HttpErrorResponse) {

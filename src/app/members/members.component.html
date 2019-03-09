@@ -5,19 +5,19 @@
     </div>
     <div class='card-body'>
       <div class='row'>
-        <div class='col-md-2'>Filter by:</div>
+        <div class='col-md-1'>
+            <Label type="text">Filter by:</Label>
+          </div>
         <div class='col-md-2'>
-          <input type='text'
-                  [(ngModel)]='listFilter' />
-        </div>
-        <!-- <div class='col-md-4'>
-          <a [routerLink]="['/members/edit']">Add</a>                 
-        </div>         -->
+          <input type='text' [(ngModel)]='listFilter' />          
+        </div>  
+        <div class="col-md-2">
+    <button class='btn btn-light' (click)='openAdvancedSearch()'>Advance Search</button>
+     </div>     
       </div>
-      <div class='row'
-           *ngIf='listFilter'>
+      <div class='row' *ngIf='listFilter'>
         <div class='col-md-6'>
-           <h4>Filtered by: {{listFilter}}</h4>
+           <h4>Filtered by: {{listFilter}}</h4>          
         </div>
       </div>
       <div class='table-responsive'>

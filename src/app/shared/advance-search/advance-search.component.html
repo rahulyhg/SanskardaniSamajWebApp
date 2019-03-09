@@ -1,0 +1,60 @@
+<div class='card'>
+    <!-- <div class='card-header'>
+      {{pageTitle + ': ' + familyInfo.Name}}
+    </div> -->
+    <form #searchForm="ngForm" (ngSubmit)="searchForm.form.valid && applySearch()" novalidate style="margin:8px;">
+      <div class='row'>
+        <div class='col-md-12'>
+          <div><b>
+              <h5>Advance Search</h5>
+            </b>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>
+              <input type="checkbox" [(ngModel)]='searchCreiteria.IsName' name="IsName"/>
+              <Label type="text">Name:</Label>
+            </div>
+            <div class='col-md-8'>
+              <input type='text' class="form-control" name="name" [(ngModel)]='searchCreiteria.Name' #name="ngModel" [disabled]='!searchCreiteria.IsName' 
+                pattern="^[\w\s-]+$" 
+                minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': searchForm.submitted && name.invalid }" />              
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>
+              <input type="checkbox" [(ngModel)]='searchCreiteria.IsDOBRange' name="IsDOBRange" />
+              <Label type="text">DOB Range:</Label>
+            </div>
+            <div class='col-md-4'>
+              <input type='date' name="MinDOB" [(ngModel)]='searchCreiteria.StartDOB' [disabled]='!searchCreiteria.IsDOBRange' />
+              <label type='text' style="margin-left:4px;margin-top:-4px">Min</label>
+            </div>
+            <div class='col-md-4'>
+                <input type='date' name="MaxDOB" [(ngModel)]='searchCreiteria.EndDOB' [disabled]='!searchCreiteria.IsDOBRange' />
+                <label type='text' style="margin-left:4px;margin-top:-4px">Max</label>
+              </div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>
+              <input type="checkbox" [(ngModel)]='searchCreiteria.IsAmountRange' name="IsAmountRange"/>
+              <Label type="text">Amt Received:</Label>
+            </div>
+            <div class='col-md-4'>               
+                <input type='text' name="fromAmt" [(ngModel)]='searchCreiteria.AmountFrom' [disabled]='!searchCreiteria.IsAmountRange'/>
+                <label type='text' style="margin-left:4px;margin-top:-4px">Min</label>
+            </div>
+            <div class='col-md-4'>
+                <input type='text' name="toAmt" [(ngModel)]='searchCreiteria.AmountTo' [disabled]='!searchCreiteria.IsAmountRange'/>
+                <label type='text' style="margin-left:4px;margin-top:-4px">Max</label>
+            </div>
+          </div>        
+        </div>
+      </div>
+      <div class='card-footer'>
+        <button class='btn btn-outline-secondary' (click)='close()' style='width:80px'> Cancel
+        </button>
+        <button class='btn btn-outline-secondary' style='width:80px;margin: 0px 4px'> Apply
+        </button>
+      </div>
+    </form>
+  </div>

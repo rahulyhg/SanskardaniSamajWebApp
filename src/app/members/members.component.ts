@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { IMember } from '../models/member';
 import { Router } from '@angular/router';
 import { MembersService } from './members.service';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule, Validator } from '@angular/forms';
+import { AdvanceSearchComponent } from '../shared/advance-search/advance-search.component';
 
 @Component({
   selector: 'app-members',
@@ -25,7 +28,8 @@ export class MembersComponent implements OnInit {
   }
 
   constructor(private router: Router,
-    private memberService: MembersService) {
+    private memberService: MembersService,
+    public dialog: MatDialog) {
     this.getMembers();
   }
 
@@ -62,5 +66,31 @@ export class MembersComponent implements OnInit {
         this.filteredMembers.splice(this.filteredMembers.indexOf(mem), 1);
       }
     }
+  }
+
+  openAdvancedSearch() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '600px';
+
+    let dialogRef = this.dialog.open(AdvanceSearchComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null) {
+        this.memberService.advancedSearch(result).subscribe(
+          response => {
+            if (response.StatusCode == 100) {
+              this.members = <IMember[]>response.Data;
+              this.filteredMembers = this.members;
+            }
+            else {
+              alert(console.log(response.Message));
+              console.log(response.Data);
+            }
+          },
+          error => this.errorMessage = <any>error);
+      }
+    });
   }
 }
