@@ -18,6 +18,7 @@ export class MembersComponent implements OnInit {
   errorMessage = '';
   members: IMember[];
   filteredMembers: IMember[] = [];
+  filterApplied: boolean;
 
   _listFilter = '';
   get listFilter(): string {
@@ -30,7 +31,7 @@ export class MembersComponent implements OnInit {
 
   constructor(private router: Router,
     private memberService: MembersService,
-    public dialog: MatDialog,        
+    public dialog: MatDialog,
     private spinnerOverlayService: SpinnerOverlayService) {
     this.getMembers();
   }
@@ -40,23 +41,25 @@ export class MembersComponent implements OnInit {
   }
 
   getMembers() {
-    this.spinnerOverlayService.show();
-    this.memberService.getMembers().subscribe(
-      response => {
-        if (response.StatusCode == 100) {
-          this.members = <IMember[]>response.Data;
-          this.filteredMembers = this.members;
-        }
-        else {
-          alert(console.log(response.Message));
-          console.log(response.Data);
-        }
-        this.spinnerOverlayService.hide();
-      },
-      error =>{ 
-        this.errorMessage = <any>error;
-        this.spinnerOverlayService.hide();      
-       });
+    if (!this.filterApplied) {
+      this.spinnerOverlayService.show();
+      this.memberService.getMembers().subscribe(
+        response => {
+          if (response.StatusCode == 100) {
+            this.members = <IMember[]>response.Data;
+            this.filteredMembers = this.members;
+          }
+          else {
+            alert(console.log(response.Message));
+            console.log(response.Data);
+          }
+          this.spinnerOverlayService.hide();
+        },
+        error => {
+          this.errorMessage = <any>error;
+          this.spinnerOverlayService.hide();
+        });
+    }
   }
 
   performFilter(filterBy: string): IMember[] {
@@ -85,19 +88,30 @@ export class MembersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
+        this.spinnerOverlayService.show();
         this.memberService.advancedSearch(result).subscribe(
           response => {
+            this.spinnerOverlayService.hide();
             if (response.StatusCode == 100) {
               this.members = <IMember[]>response.Data;
               this.filteredMembers = this.members;
+              this.filterApplied = true;
             }
             else {
               alert(console.log(response.Message));
               console.log(response.Data);
             }
           },
-          error => this.errorMessage = <any>error);
+          error =>{
+             this.errorMessage = <any>error;
+             this.spinnerOverlayService.hide();
+            });
       }
     });
+  }
+
+  clearSearch() {
+    this.filterApplied = false;
+    this.getMembers();
   }
 }
