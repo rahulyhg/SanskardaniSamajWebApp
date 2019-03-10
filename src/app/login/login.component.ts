@@ -4,9 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../login/authentication.service';
+import { SpinnerComponent } from '../shared/spinner/spinner.component';
+import { SpinnerOverlayService } from '../shared/spinner-overlay/spinner-overlay.service';
 
-@Component({ templateUrl: 'login.component.html',
-             styleUrls: ['login.component.css'] })
+@Component({
+    templateUrl: 'login.component.html',
+    styleUrls: ['login.component.css']
+})
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
@@ -18,10 +22,11 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
-    ) { 
+        private authenticationService: AuthenticationService,
+        private spinnerOverlayService: SpinnerOverlayService
+    ) {
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) { 
+        if (this.authenticationService.currentUserValue) {
             this.router.navigate(['/']);
         }
     }
@@ -48,17 +53,20 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
+        this.spinnerOverlayService.show();
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
 
                     this.loading = false;
+                    this.spinnerOverlayService.hide();
                     this.router.navigate(['/welcome']);
                 },
                 error => {
                     this.error = error;
                     this.loading = false;
+                    this.spinnerOverlayService.hide();
                 });
     }
 }
