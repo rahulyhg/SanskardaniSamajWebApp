@@ -5,6 +5,7 @@ import { MembersService } from './members.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule, Validator } from '@angular/forms';
 import { AdvanceSearchComponent } from '../shared/advance-search/advance-search.component';
+import { SpinnerOverlayService } from '../shared/spinner-overlay/spinner-overlay.service';
 
 @Component({
   selector: 'app-members',
@@ -29,7 +30,8 @@ export class MembersComponent implements OnInit {
 
   constructor(private router: Router,
     private memberService: MembersService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,        
+    private spinnerOverlayService: SpinnerOverlayService) {
     this.getMembers();
   }
 
@@ -38,6 +40,7 @@ export class MembersComponent implements OnInit {
   }
 
   getMembers() {
+    this.spinnerOverlayService.show();
     this.memberService.getMembers().subscribe(
       response => {
         if (response.StatusCode == 100) {
@@ -48,8 +51,12 @@ export class MembersComponent implements OnInit {
           alert(console.log(response.Message));
           console.log(response.Data);
         }
+        this.spinnerOverlayService.hide();
       },
-      error => this.errorMessage = <any>error);
+      error =>{ 
+        this.errorMessage = <any>error;
+        this.spinnerOverlayService.hide();      
+       });
   }
 
   performFilter(filterBy: string): IMember[] {

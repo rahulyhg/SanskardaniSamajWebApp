@@ -27,6 +27,9 @@ import { FamilyinfoComponent } from './members/familyinfo/familyinfo.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { AdvanceSearchComponent } from './shared/advance-search/advance-search.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { SpinnerOverlayComponent } from './shared/spinner-overlay/spinner-overlay.component';
+import { SpinnerOverlayService } from './shared/spinner-overlay/spinner-overlay.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { AdvanceSearchComponent } from './shared/advance-search/advance-search.c
     MemberEditComponent,
     FamilyinfoComponent,
     LoginComponent,
-    AdvanceSearchComponent
+    AdvanceSearchComponent,
+    SpinnerComponent,
+    SpinnerOverlayComponent
   ],
   imports: [
     BrowserModule,
@@ -73,9 +78,9 @@ import { AdvanceSearchComponent } from './shared/advance-search/advance-search.c
       { path: '**', redirectTo: '' },
     ]),
   ],
-  providers: [
+  providers: [SpinnerOverlayService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [FamilyinfoComponent,AdvanceSearchComponent]
+  entryComponents: [FamilyinfoComponent,AdvanceSearchComponent,SpinnerOverlayComponent]
 })
 export class AppModule { }

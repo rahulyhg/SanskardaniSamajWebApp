@@ -9,6 +9,7 @@ import { FamilyinfoComponent } from './familyinfo/familyinfo.component';
 import { FamilyInfo, IFamilyInfo } from '../models/familyinfo';
 import { MemberAddress, IMemberAddress } from '../models/memberaddress';
 import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule, Validator } from '@angular/forms';
+import { SpinnerOverlayService } from '../shared/spinner-overlay/spinner-overlay.service';
 
 @Component({
   templateUrl: './member-edit.component.html',
@@ -28,7 +29,8 @@ export class MemberEditComponent implements OnInit {
   constructor(public dialog: MatDialog, private route: ActivatedRoute,
     private router: Router,
     private memberService: MembersService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private spinnerOverlayService: SpinnerOverlayService) {
     router.events.subscribe(
       (event: NavigationEvent): void => {
         console.log(router.url);
@@ -59,6 +61,7 @@ export class MemberEditComponent implements OnInit {
   get f() { return this.memberForm.controls; }
 
   getMember(id: string) {
+    this.spinnerOverlayService.show();
     this.memberService.getMember(id).subscribe(
       response => {
         if (response.StatusCode == 100) {
@@ -69,8 +72,12 @@ export class MemberEditComponent implements OnInit {
           alert(console.log(response.Message));
           console.log(response.Data);
         }
+        this.spinnerOverlayService.hide();
       },
-      error => this.errorMessage = <any>error);
+      error => {
+        this.errorMessage = <any>error;
+        this.spinnerOverlayService.hide();
+      });
   }
 
   onBack(): void {
@@ -86,10 +93,11 @@ export class MemberEditComponent implements OnInit {
     }
 
     this.member.FamilyInfo = this.familyMembers;
-
+    this.spinnerOverlayService.show();
     if (this.member._id == undefined || this.member._id == "") {
       this.memberService.postMember(this.member).subscribe(
         response => {
+          this.spinnerOverlayService.hide();
           if (response.StatusCode == 100) {
             alert("date saved successfully.");
             this.router.navigate(['/members']);
@@ -99,21 +107,48 @@ export class MemberEditComponent implements OnInit {
           }
           else {
             alert(JSON.stringify(response));
-          }
+          }                  
         },
         err2 => {
-          if (err2.error) {
+          this.spinnerOverlayService.hide();
+          if (err2.error) {            
             alert(JSON.stringify(err2.error));
           }
           else {
             alert(JSON.stringify(err2));
           }
           console.log(err2);
+          
           return false;
         });
     }
     else {
-      this.result = this.memberService.putMember(this.member);
+      this.memberService.putMember(this.member).subscribe(
+        response => {
+          this.spinnerOverlayService.hide();
+          if (response.StatusCode == 100) {
+            alert("date saved successfully.");
+            this.router.navigate(['/members']);
+          }
+          else if(response.StatusCode == 421){
+            alert(response.Message);
+          }
+          else {
+            alert(JSON.stringify(response));
+          }                  
+        },
+        err2 => {
+          this.spinnerOverlayService.hide();
+          if (err2.error) {            
+            alert(JSON.stringify(err2.error));
+          }
+          else {
+            alert(JSON.stringify(err2));
+          }
+          console.log(err2);
+          
+          return false;
+        });
     }
   }
 

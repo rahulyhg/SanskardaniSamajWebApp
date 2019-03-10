@@ -71,7 +71,7 @@ export class MembersService {
     }
   }
 
-  putMember(member: IMember): boolean {
+  putMember(member: IMember): Observable<IResponse> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const httpOptions = {
@@ -81,29 +81,10 @@ export class MembersService {
         })
       };
       console.log(member);
-      this.http.put(this.membersUrl + "/" + member._id, member, httpOptions)
-        .subscribe(data => {
-          // console.log('All: ' + JSON.stringify(data));
-          var resp = <IResponse>data;
-          if (resp.StatusCode == 100) {
-            alert("date saved successfully.");
-          }
-          else {
-            alert(JSON.stringify(resp));
-            console.log(resp);
-          }
-        },
-          err2 => {
-            if (err2.error) {
-              alert(JSON.stringify(err2.error));
-            }
-            else {
-              alert(JSON.stringify(err2));
-            }
-            console.log(err2);
-            return false;
-          });
-      return false;
+      return this.http.put(this.membersUrl + "/" + member._id, member, httpOptions).
+      pipe(map((data: IResponse) => {            
+        return data;
+      }), catchError(this.handleError));       
     }
   }
 

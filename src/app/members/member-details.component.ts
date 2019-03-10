@@ -3,6 +3,7 @@ import { IMember } from '../models/member';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MembersService } from './members.service';
 import { Event as NavigationEvent } from "@angular/router";
+import { SpinnerOverlayService } from '../shared/spinner-overlay/spinner-overlay.service';
 
 @Component({
 templateUrl:'./member-details.component.html'
@@ -17,7 +18,8 @@ export class MemberDetailsComponent implements OnInit {
 
 constructor(private route: ActivatedRoute,
     private router: Router,
-    private memberService: MembersService) {
+    private memberService: MembersService,    
+    private spinnerOverlayService: SpinnerOverlayService) {
         router.events.subscribe(
             ( event: NavigationEvent ) : void => {
 
@@ -37,8 +39,10 @@ constructor(private route: ActivatedRoute,
   }
 
   getMember(id: string) {
+    this.spinnerOverlayService.show();
     this.memberService.getMember(id).subscribe(
       response => {
+        this.spinnerOverlayService.hide();
         if (response.StatusCode == 100) {
           this.member = <IMember>response.Data;
         }
@@ -47,7 +51,10 @@ constructor(private route: ActivatedRoute,
           console.log(response.Data);
         }
       },
-      error => this.errorMessage = <any>error);
+      error => {
+        this.errorMessage = <any>error;
+        this.spinnerOverlayService.hide();
+      });
   }
 
   onBack(): void {
