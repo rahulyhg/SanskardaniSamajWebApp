@@ -20,6 +20,13 @@
                 minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': searchForm.submitted && name.invalid }" />              
             </div>
           </div>
+          <div class="row text-danger" style="margin-top:-15px" >
+              <div class='col-md-4'>
+                </div>
+            <div class='col-md-8'>
+              <label type='text' name="nameError" >{{nameError}}</label>
+            </div>
+          </div> 
           <div class='row'>
             <div class='col-md-4'>
               <input type="checkbox" [(ngModel)]='searchCreiteria.IsDOBRange' name="IsDOBRange" />
@@ -28,26 +35,44 @@
             <div class='col-md-4'>
               <input type='date' name="MinDOB" [(ngModel)]='searchCreiteria.StartDOB' [disabled]='!searchCreiteria.IsDOBRange' />
               <label type='text' style="margin-left:4px;margin-top:-4px">Min</label>
+
             </div>
             <div class='col-md-4'>
                 <input type='date' name="MaxDOB" [(ngModel)]='searchCreiteria.EndDOB' [disabled]='!searchCreiteria.IsDOBRange' />
                 <label type='text' style="margin-left:4px;margin-top:-4px">Max</label>
               </div>
           </div>
+          <div class="row text-danger" style="margin-top:-15px" >
+              <div class='col-md-4'>
+                </div>
+            <div class='col-md-8'>
+              <label type='text' name="dobError" >{{dobError}}</label>
+            </div>
+          </div> 
           <div class='row'>
             <div class='col-md-4'>
               <input type="checkbox" [(ngModel)]='searchCreiteria.IsAmountRange' name="IsAmountRange"/>
               <Label type="text">Amt Received:</Label>
             </div>
             <div class='col-md-4'>               
-                <input type='text' name="fromAmt" [(ngModel)]='searchCreiteria.AmountFrom' [disabled]='!searchCreiteria.IsAmountRange'/>
+                <input type='text' name="fromAmt" [(ngModel)]='searchCreiteria.AmountFrom' [disabled]='!searchCreiteria.IsAmountRange'
+                onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onpaste="return false"/>
                 <label type='text' style="margin-left:4px;margin-top:-4px">Min</label>
             </div>
             <div class='col-md-4'>
-                <input type='text' name="toAmt" [(ngModel)]='searchCreiteria.AmountTo' [disabled]='!searchCreiteria.IsAmountRange'/>
+                <input type='text' name="toAmt" [(ngModel)]='searchCreiteria.AmountTo' [disabled]='!searchCreiteria.IsAmountRange'
+                onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onpaste="return false"/>
                 <label type='text' style="margin-left:4px;margin-top:-4px">Max</label>
             </div>
-          </div>        
+            
+          </div>  
+          <div class="row text-danger" style="margin-top:-15px" >
+              <div class='col-md-4'>
+                </div>
+            <div class='col-md-8'>
+              <label type='text' name="amtError" >{{amtError}}</label>
+            </div>
+          </div>      
         </div>
       </div>
       <div class='card-footer'>

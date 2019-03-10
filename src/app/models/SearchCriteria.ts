@@ -20,5 +20,8 @@ export class SearchCriteria implements ISearchCriteria {
     AmountTo: Number;
 
     constructor() {
+        this.AmountFrom=0;
+        this.AmountTo=0;
+        this.Name="";
     }
 }
