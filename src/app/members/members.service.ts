@@ -12,8 +12,8 @@ import { SearchCriteria } from '../models/SearchCriteria';
 })
 
 export class MembersService {
-  private membersUrl = 'https://ssmnodejsservice.herokuapp.com/api/members';
-  private advancedSearchUrl = 'https://ssmnodejsservice.herokuapp.com/api/advancesearch';
+  private membersUrl = 'https://ssmdeploynodejsservice.herokuapp.com/api/members';
+  private advancedSearchUrl = 'https://ssmdeploynodejsservice.herokuapp.com/api/advancesearch';
 
   constructor(private http: HttpClient) { }
 

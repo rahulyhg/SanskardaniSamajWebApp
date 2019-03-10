@@ -13,7 +13,7 @@ export class AuthenticationService {
     password: string = "12345";
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    private baseUrl = 'https://ssmnodejsservice.herokuapp.com/'
+    private baseUrl = 'https://ssmdeploynodejsservice.herokuapp.com/'
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentUser')));
