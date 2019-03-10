@@ -86,6 +86,7 @@ export class FamilyinfoComponent implements OnInit {
     }
     else {
       this.familyInfo.IsOtherRelationship = false;
+      this.familyInfo.OtherRelationship = "";
     }
   }
 }
