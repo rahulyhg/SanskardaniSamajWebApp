@@ -16,14 +16,13 @@
             </div>
             <div class='col-md-8'>
               <input type='text' class="form-control" name="name" [(ngModel)]='searchCreiteria.Name' #name="ngModel" [disabled]='!searchCreiteria.IsName' 
-                pattern="^[\w\s-]+$" 
-                minlength="3" maxlength="30" [ngClass]="{ 'is-invalid': searchForm.submitted && name.invalid }" />              
+                pattern="^[\w\s-]+$" />              
             </div>
           </div>
           <div class="row text-danger" style="margin-top:-15px" >
               <div class='col-md-4'>
                 </div>
-            <div class='col-md-8'>
+            <div class='col-md-8'> 
               <label type='text' name="nameError" >{{nameError}}</label>
             </div>
           </div> 
