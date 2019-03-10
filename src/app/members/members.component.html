@@ -5,15 +5,15 @@
     </div>
     <div class='card-body'>
       <div class='row'>
-        <div class='col-md-1'>
-            <Label type="text">Filter by:</Label>
-          </div>
         <div class='col-md-2'>
-          <input type='text' [(ngModel)]='listFilter' />          
-        </div>  
+          <Label type="text">Filter by:</Label>
+        </div>
+        <div class='col-md-4'>
+          <input type='text' [(ngModel)]='listFilter' />
+        </div>
         <div class="col-md-2">
-    <button class='btn btn-light' (click)='openAdvancedSearch()'>Advance Search</button>
-     </div>     
+          <button class='btn btn-light' (click)='openAdvancedSearch()'>Advance Search</button>
+        </div>
       </div>
       <div class='row' *ngIf='listFilter'>
         <div class='col-md-6'>
