@@ -48,6 +48,7 @@ export class Member implements IMember {
         this.Address.State = "Madhya Pradesh";
         this.Address.District = "Jabalpur";
         this.EmailId ='';
+        this.MembershipAmount= 0;
      }
 
 }

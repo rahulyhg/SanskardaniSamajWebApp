@@ -46,35 +46,20 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col-md-5'>
+          <div class='col-md-4'>
             <Label type="text">Married:</Label>
+            <input type='checkbox' [(ngModel)]='familyInfo.IsMarried' name="isMarried" style="margin-top:15px;" />
           </div>
-          <div class='col-md-7'>
-            <input type='checkbox' [(ngModel)]='familyInfo.IsMarried' name="isMarried"/>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-5'>
+        
+          <div class='col-md-4'>
             <Label type="text">Dependent:</Label>
+            <input type='checkbox' [(ngModel)]='familyInfo.IsDependent' name="isDependent" style="margin-top:15px;" />
           </div>
-          <div class='col-md-7'>
-            <input type='checkbox' [(ngModel)]='familyInfo.IsDependent' name="isDependent"/>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-5'>
+        
+          <div class='col-md-4'>
             <Label type="text">Is Member:</Label>
-          </div>
-          <div class='col-md-7'>
-            <input type='checkbox' [(ngModel)]='familyInfo.IsMember' name="isMember"/>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-5'>
-            <Label type="text">Occupation:</Label>
-          </div>
-          <div class='col-md-7'>
-            <input type='text' [(ngModel)]='familyInfo.Occupation' name="occupation"/>
+            <input type='checkbox' [(ngModel)]='familyInfo.IsMember' name="isMember" style="margin-top:15px;"/>
+        
           </div>
         </div>
         <div class='row'>
@@ -86,6 +71,14 @@
             onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" onpaste="return false"/>
           </div>
         </div>
+        <div class='row'>
+            <div class='col-md-5'>
+              <Label type="text">Occupation:</Label>
+            </div>
+            <div class='col-md-7'>
+              <input type='text' [(ngModel)]='familyInfo.Occupation' name="occupation"/>
+            </div>
+          </div>
         <div class='row'>
           <div class='col-md-5'>
             <Label type="text">Relationship:</Label>
