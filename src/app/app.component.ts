@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from './login/authentication.service';
 import { Router } from '@angular/router';
 import { User } from './models/user';
@@ -9,7 +9,8 @@ import { User } from './models/user';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  
   pageTitle = 'Chhatrapati Shivaji Maratha Samaj Sangh Jabalpur';
   currentUser: User;
 
@@ -18,6 +19,20 @@ export class AppComponent {
     private authenticationService: AuthenticationService) {
 
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  ngOnInit() {
+    let context = this;
+    window.addEventListener("beforeunload", function (e) {
+        let currentUser : User = JSON.parse(localStorage.getItem('currentUser'));
+        if(currentUser){
+            context.logout();
+        }
+    });
+}
+
+  ngOnDestroy(): void {
+    this.logout();
   }
   
   logout() {
