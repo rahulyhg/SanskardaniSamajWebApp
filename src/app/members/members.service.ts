@@ -18,7 +18,7 @@ export class MembersService {
   constructor(private http: HttpClient) { }
 
   getMembers(): Observable<IResponse> {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -36,7 +36,7 @@ export class MembersService {
   }
 
   getMember(id: string): Observable<IResponse | undefined> {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -54,7 +54,7 @@ export class MembersService {
   }
 
   postMember(member: IMember): Observable<IResponse> {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -72,7 +72,7 @@ export class MembersService {
   }
 
   putMember(member: IMember): Observable<IResponse> {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -89,7 +89,7 @@ export class MembersService {
   }
 
   deleteMember(id: string): boolean {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -124,7 +124,7 @@ export class MembersService {
 
   advancedSearch(searchCriteria: SearchCriteria):Observable<IResponse>
   {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
       const httpOptions = {
         headers: new HttpHeaders({

@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
     window.addEventListener("beforeunload", function (e) {
         let currentUser : User = JSON.parse(localStorage.getItem('currentUser'));
         if(currentUser){
-            context.logout();
+            //context.logout();
         }
     });
 }
